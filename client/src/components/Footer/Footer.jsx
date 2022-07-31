@@ -4,7 +4,9 @@ import './Footer.scss';
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div className='footer'>
+      Created by Liliana Leiva. 2022
+    </div>
   )
 }
 

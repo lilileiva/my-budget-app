@@ -1,0 +1,28 @@
+.navbar {
+    width: initial;
+    height: 50px;
+    background-color: gray;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    h1 {
+        color: white;
+    }
+}
+
+.buttons {
+    cursor: pointer;
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.buttons a:first-of-type {
+    margin-right: 2rem;
+}
