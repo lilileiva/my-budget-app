@@ -3,21 +3,21 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   
-  sequelize.define('operation', {
+  sequelize.define('Operation', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    concept: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
+    amount: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    released: {
+    type: {
       type: DataTypes.STRING
     }
   },

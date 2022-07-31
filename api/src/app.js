@@ -6,15 +6,15 @@ const routes = require('./routes/index.js');
 require('./db.js');
 
 //server initialize
-const server = express();
-server.name = 'API';
+const app = express();
+app.name = 'API';
 
 //middlewares
-server.use(cookieParser());
-server.use(morgan('dev'));
+app.use(cookieParser());
+app.use(morgan('dev'));
 
 //access control allow
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -23,14 +23,14 @@ server.use((req, res, next) => {
 });
 
 //routes
-server.use('/', routes);
+app.use('/', routes);
 
 // Error catching endware.
-server.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || err;
   console.error(err);
   res.status(status).send(message);
 });
 
-module.exports = server;
+module.exports = app;

@@ -1,11 +1,12 @@
 const app = require('./app.js');
-const { connectDB } = require('./db');
+const { connection } = require('./db.js');
 
 try {
-    app.listen(app.get('port'), () => {
-        console.log('Server listening on port ->', app.get('port'));
-        connectDB();
-    })
+    connection.sync({ force: false }).then(() => {
+        app.listen(app.get('port'), () => {
+            console.log('Server listening on port ->', app.get('port'));
+        });
+    });
 } catch (error) {
     console.log(error)
 }

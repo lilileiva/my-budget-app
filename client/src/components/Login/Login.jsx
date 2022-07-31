@@ -5,7 +5,7 @@ import './Login.scss';
 function Login() {
   return (
     <div className='login'>
-        <p>Inicia sesión...</p>
+        <h2>Inicia sesión...</h2>        
         <form>
             <input type='text' placeholder='Username...' />            
             <input type='text' placeholder='Password...' />                        

@@ -5,7 +5,7 @@ import './Register.scss';
 function Register() {
   return (
     <div className='register'>
-        <p>Registro...</p>
+        <h2>Registro...</h2>
         <form>
             <input type='text' placeholder='Username...' />            
             <input type='text' placeholder='Password...' />            

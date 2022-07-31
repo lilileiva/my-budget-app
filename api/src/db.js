@@ -2,11 +2,10 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/budget-admin-app`, {
+
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/personal-budget`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -32,16 +31,15 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 // Importo los models
-const { operation, user, category } = sequelize.models;
+const { Operation, User, Category } = sequelize.models;
 
 //Relaciones
-operation.belongsTo(user, { through: 'operation_user' });
-user.hasMany(operation, { through: 'operation_user' });
-category.belongsToMany(operation, { through: 'category_operation' });
-category.belongsToMany(user, { through: 'category_user' });
+Operation.belongsTo(User, { through: 'Operation_User' });
+User.belongsToMany(Operation, { through: 'Operation_User' });
+Category.belongsToMany(Operation, { through: 'Category_Operation' });
 
 
 module.exports = {
   ...sequelize.models,
-  conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+  connection: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
