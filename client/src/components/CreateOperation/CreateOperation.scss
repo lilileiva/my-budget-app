@@ -1,17 +1,53 @@
-.createOperation {
-    display: flex;
-    flex-direction: column;    
-    justify-content: center;
-    align-items: center;
-    height: 70%;
+@import '../../sass/variables.scss';
 
-    form {
-        display: flex;
-        flex-direction: column;
-        width: 300px;    
+.createOperation {
+    @include background-properties();
+
+    .title {
+        @include box(white, $red-color);
+    }
+    
+    .formContainer {
+        form {
+            display: flex;
+            flex-direction: column;      
+    
+            @include box($brown-color, white);
+        }
     }
 
-    input, select {
+    .inputContainer {
+        width: 400px;
+    }
+
+    input,
+    select {
         margin-top: 2rem;
+        font-size: 20px;
+        color: gray;
+               
+    }
+
+    input[type=text] {
+        width: 492px; 
+    }
+    select {
+        width: 500px; 
+    }
+
+    input[type=submit] {
+        @include blue-button();
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-top: 3rem;
+    }
+    input[type=submit]:hover {
+        @include blue-button-hover();
+    }
+
+    .error {
+        position: absolute;
+        color: $red-error-color;
+        margin: 0;
     }
 }

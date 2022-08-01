@@ -26,45 +26,68 @@ function CreateOperation() {
     if (!inputValues.category) {
       errors.category = 'Debes agregar una categoría.';
     }
+
+    return errors;
   }
 
   const handleInputChange = (e) => {
     e.preventDefault();
     setInputValues({
+      ...inputValues,
       [e.target.name]: e.target.value
     })
   }
 
   const [isSubmit, setIsSubmit] = useState(false);
-  const handleInputSubmit = () => {
+  const handleInputSubmit = (e) => {
+    e.preventDefault();
     setInputErrors(validate(inputValues));
     setIsSubmit(true);
   }
 
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
-
     }
-  }, [inputErrors, isSubmit])
+    setIsSubmit(false);
+  }, [inputErrors, isSubmit]);
+
+  console.log(inputErrors)
+  console.log(inputValues)
 
   return (
     <div className='createOperation'>
-      <h2>Nueva operación</h2>
-      <form onSubmit={handleInputSubmit}>
-        <input type='text' placeholder='Concepto...' onChange={(e) => handleInputChange(e)} />
-        <input type='text' placeholder='Monto...' onChange={(e) => handleInputChange(e)} />
-        <select type='text' onSelect={(e) => handleInputChange(e)} >
-          <option>Tipo...</option>
-          <option value='ingreso'>Ingreso</option>
-          <option value='egreso'>Egreso</option>
-        </select>
-        <select type='text' onSelect={(e) => handleInputChange(e)} >
-          <option>Categorias...</option>
-          <option>Comidas</option>
-          <option>Luz</option>
-        </select>
-        <input type='submit' value='Crear' />
-      </form>
+      <div className='title'>
+        <h2>Nueva operación</h2>
+      </div>
+      <div className='formContainer'>
+        <form onSubmit={(e) => handleInputSubmit(e)}>
+          <div className='inputContainer'>
+            <input type='text' name='concept' value={inputValues.concept} placeholder='Concepto...' onChange={(e) => handleInputChange(e)} />
+            {inputErrors.concept && <p className='error'>{inputErrors.concept}</p>}
+          </div>
+          <div>
+            <input type='text' name='amount' value={inputValues.amount} placeholder='Monto...' onChange={(e) => handleInputChange(e)} />
+            {inputErrors.amount && <p className='error'>{inputErrors.amount}</p>}
+          </div>
+          <div>
+            <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
+              <option value='null'>Tipo...</option>
+              <option value='ingreso'>Ingreso</option>
+              <option value='egreso'>Egreso</option>
+            </select>
+            {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
+          </div>
+          <div>
+            <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
+              <option value='null'>Categorias...</option>
+              <option value='comidas'>Comidas</option>
+              <option value='luz'>Luz</option>
+            </select>
+            {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
+          </div>
+          <input type='submit' value='Crear' />
+        </form>
+      </div>
     </div>
   )
 }

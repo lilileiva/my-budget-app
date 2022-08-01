@@ -1,0 +1,27 @@
+@import '../../sass/variables.scss';
+
+.balanceContainer {
+    width: 500px;
+
+    .buttonContainer {
+        width: inherit;
+        display: flex;
+        justify-content: center;
+
+        button {
+            @include blue-button();
+        }
+
+        button:hover {
+            @include blue-button-hover();
+        }
+    }
+}
+
+.balance {
+    @include box(white, $red-color);
+}
+
+.operations {
+    @include box($brown-color, white);
+}

@@ -1,8 +1,7 @@
+@import '../../sass/variables.scss';
+
 .home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;    
+    @include background-properties();
 
     button {
         width: 300px;

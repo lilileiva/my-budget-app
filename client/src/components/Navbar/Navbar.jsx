@@ -13,8 +13,8 @@ function Navbar() {
         <h1>Presupuesto Personal</h1>
       </a>
       <div className='buttons'>
-        <a onClick={() => navigate('/login')}>Iniciar sesión</a>
-        <a onClick={() => navigate('/register')}>Registrarse</a>
+        <a  className='loginButton' onClick={() => navigate('/login')}>Iniciar sesión</a>
+        <a className='registerButton' onClick={() => navigate('/register')}>Registrarse</a>
       </div>
     </div>
   )
