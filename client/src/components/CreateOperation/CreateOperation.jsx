@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './CreateOperation.scss';
+import { createOperation } from '../../redux/actions';
+
 
 function CreateOperation() {
+
+  const dispatch = useDispatch();
 
   const [inputValues, setInputValues] = useState({
     concept: "",
@@ -47,12 +52,11 @@ function CreateOperation() {
 
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      dispatch(createOperation(inputValues));
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
-
-  console.log(inputErrors)
-  console.log(inputValues)
+  
 
   return (
     <div className='createOperation'>

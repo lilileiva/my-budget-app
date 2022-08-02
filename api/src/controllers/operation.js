@@ -2,14 +2,6 @@ const { Operation, User, Category } = require("../db.js");
 const { Sequelize } = require('sequelize');
 
 
-const prueba = async (req, res) => {
-    try {
-        return res.status(200).json('prueba');
-    } catch (error) {
-        return res.status(404).json({ error: 'There was an error...' });
-    }
-}
-
 const getOperations = async (req, res) => {
     try {        
         const operations = await Operation.findAll()
@@ -33,30 +25,39 @@ const getOperations = async (req, res) => {
     }
 }
 
-const createOperation = async (req, res) => {
+const createOperation = async(req, res) => {    
     const { concept, amount, type, category } = req.body;
-    amount = Number(amount);
-
-    try {
+    
+    try {                
         const newOperation = await Operation.create({
             concept,
-            amount,
+            amount: Number(amount),
             type
         })
-        const newCategory = await Genre.findOrCreate({
-            name: category
-        })
-        await newOperation.setCategory(newCategory);
 
-        return res.status(200).send('Operation created');
+        const categoryFound = await Category.findAll({
+            where: {
+                name: category
+            }
+        });
+        if (!categoryFound) {
+            await newOperation.setCategory(categoryFound);
+        } else {
+            const newCategory = await Category.create({
+                name: category
+            })
+            await newOperation.setCategory(newCategory);
+        }
+
+        return res.status(201).send('Operation created');
     } catch (error) {
-        return res.status(404).json({ error: 'There was an error...' });
+        console.log(error)
+        // return res.status(404).json({ error: 'There was an error...' });        
     }
 }
 
 
-module.exports = {
-    prueba,
+module.exports = {    
     getOperations,
     createOperation
 }

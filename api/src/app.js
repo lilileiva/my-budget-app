@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
@@ -11,6 +12,8 @@ app.name = 'API';
 app.set( 'port', process.env.PORT || 3001 )
 
 //middlewares
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
 app.use(morgan('dev'));
 

@@ -14,11 +14,12 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     amount: {
-      type: DataTypes.TEXT,
+      type: DataTypes.FLOAT,
       allowNull: false
     },
     type: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {

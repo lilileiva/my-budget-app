@@ -23,23 +23,23 @@ export function getOperations() {
     }
 }
 
-export function createOperation(operation) {
+export function createOperation(inputValues) {
     return async function (dispatch) {
         try {
-            return await fetch(`${BASE_URL}/operations`, {
+            await fetch(`${BASE_URL}/operations`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(operation)
+                body: JSON.stringify(inputValues)
             })
                 .then((res) => res.json())
-                .then((data) => {
-                    dispatch({
-                        type: CREATE_OPERATION,
-                        payload: data
-                    })
-                })
+                // .then((data) => {
+                    // dispatch({
+                    //     type: CREATE_OPERATION,
+                    //     payload: data
+                    // })                    
+                // })
         } catch (error) {
             console.log(error)
         }
