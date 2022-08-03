@@ -13,7 +13,7 @@ const login = async (req, res) => {
         }
 
         const user = await User.findOne({
-            where: { username: username }
+            where: { username }
         })
 
         if (user) {
@@ -27,7 +27,7 @@ const login = async (req, res) => {
                     expiresIn: 60 * 60 * 24 * 7,
                 })
                 return res.status(200).send({
-                    username,
+                    id: user.id,                    
                     token
                 });
             }
@@ -48,11 +48,11 @@ const register = async (req, res) => {
             return res.status(422).json('Username and password are both required');
         }
 
-        const userFound = await User.findOne({
+        const user = await User.findOne({
             where: { username: username }
         })
 
-        if (userFound) {
+        if (user) {
             return res.status(200).send('User already exists');
         } else {
             const saltRounds = 10;

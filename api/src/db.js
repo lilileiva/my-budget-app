@@ -35,7 +35,6 @@ const { Operation, User, Category } = sequelize.models;
 
 //Relaciones
 Operation.belongsTo(User, { through: 'Operation_User' });
-User.belongsToMany(Operation, { through: 'Operation_User' });
 Category.belongsToMany(Operation, { through: 'Category_Operation' });
 
 

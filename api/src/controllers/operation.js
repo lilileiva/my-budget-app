@@ -42,6 +42,7 @@ const createOperation = async(req, res) => {
         });
         if (!categoryFound) {
             await newOperation.setCategory(categoryFound);
+            await newOperation.setUser(req.user);
         } else {
             const newCategory = await Category.create({
                 name: category
