@@ -56,7 +56,8 @@ function CreateTransaction() {
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
-  
+
+  const token = window.localStorage.getItem('token');
 
   return (
     <div className='createTransaction'>
@@ -64,33 +65,39 @@ function CreateTransaction() {
         <h2>New transaction</h2>
       </div>
       <div className='formContainer'>
-        <form onSubmit={(e) => handleInputSubmit(e)}>
-          <div className='inputContainer'>
-            <input type='text' name='concept' value={inputValues.concept} placeholder='Concept...' onChange={(e) => handleInputChange(e)} />
-            {inputErrors.concept && <p className='error'>{inputErrors.concept}</p>}
-          </div>
-          <div>
-            <input type='text' name='amount' value={inputValues.amount} placeholder='Amount...' onChange={(e) => handleInputChange(e)} />
-            {inputErrors.amount && <p className='error'>{inputErrors.amount}</p>}
-          </div>
-          <div>
-            <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
-              <option value='null'>Type...</option>
-              <option value='ingreso'>Income</option>
-              <option value='egreso'>Outcome</option>
-            </select>
-            {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
-          </div>
-          <div>
-            <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
-              <option value='null'>Categories...</option>
-              <option value='comidas'>Category 1</option>
-              <option value='luz'>Category 2</option>
-            </select>
-            {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
-          </div>
-          <input type='submit' value='Crear' />
-        </form>
+        {
+          token
+            ? <form onSubmit={(e) => handleInputSubmit(e)}>
+              <div className='inputContainer'>
+                <input type='text' name='concept' value={inputValues.concept} placeholder='Concept...' onChange={(e) => handleInputChange(e)} />
+                {inputErrors.concept && <p className='error'>{inputErrors.concept}</p>}
+              </div>
+              <div>
+                <input type='text' name='amount' value={inputValues.amount} placeholder='Amount...' onChange={(e) => handleInputChange(e)} />
+                {inputErrors.amount && <p className='error'>{inputErrors.amount}</p>}
+              </div>
+              <div>
+                <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
+                  <option value='null'>Type...</option>
+                  <option value='ingreso'>Income</option>
+                  <option value='egreso'>Outcome</option>
+                </select>
+                {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
+              </div>
+              <div>
+                <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
+                  <option value='null'>Categories...</option>
+                  <option value='comidas'>Category 1</option>
+                  <option value='luz'>Category 2</option>
+                </select>
+                {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
+              </div>
+              <input type='submit' value='Crear' />
+            </form>
+            : <>
+              <p>You should sign in to create a transaction</p>
+            </>
+        }
       </div>
     </div>
   )

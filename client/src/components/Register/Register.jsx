@@ -59,6 +59,8 @@ function Register() {
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
 
+  const token = window.localStorage.getItem('token');
+
   return (
     <div className='registerContainer'>
       <div className='register'>
@@ -67,7 +69,9 @@ function Register() {
           <h2>Sign up...</h2>
         </div>
         <div className='registerForm'>
-          <form onSubmit={(e) => handleInputSubmit(e)}>
+          {
+            token
+            ? <form onSubmit={(e) => handleInputSubmit(e)}>
             <div>
               <input type='text' name='username' value={inputValues.username} placeholder='Username...' onChange={(e) => handleInputChange(e)} />
               {inputErrors.username && <p className='error'>{inputErrors.username}</p>}
@@ -84,6 +88,9 @@ function Register() {
               <input className='signUpButton' type='submit' value='Sign up' />
             </div>
           </form>
+          : <p>You can't sign up now because ou are alreade in a session</p>
+          }
+          
         </div>
 
       </div>

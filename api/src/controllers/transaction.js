@@ -55,7 +55,7 @@ const createTransaction = async (req, res) => {
                 userId: req.user
             })                        
         }
-        return res.status(201).send('Transaction created');
+        return res.status(201).json('Transaction created');
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -87,9 +87,9 @@ const updateTransaction = async (req, res) => {
                 transaction.categoryId = categoryFound.id;
                 await transaction.save();
             }
-            return res.status(201).send('Transaction updated');
+            return res.status(201).json('Transaction updated');
         } else {
-            return res.status(200).send("You don't have access to update this transaction");
+            return res.status(200).json("You don't have access to update this transaction");
         }
 
     } catch (error) {

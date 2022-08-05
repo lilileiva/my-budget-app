@@ -46,7 +46,7 @@ function Login() {
   }
 
   const loginRequest = async () => {
-    
+
     try {
       const response = await axios.post(`${BASE_URL}/users/login`, inputValues)
 
@@ -72,6 +72,8 @@ function Login() {
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
 
+  const token = window.localStorage.getItem('token');
+
   return (
     <div className='loginContainer'>
       <div className='login'>
@@ -79,21 +81,25 @@ function Login() {
         <div className='signIn'>
           <h2>Sign in</h2>
         </div>
-        
+
         <div className='loginForm'>
-          <form onSubmit={(e) => handleInputSubmit(e)}>
-            <div>
-              <input type='text' name='username' value={inputValues.username} placeholder='Username...' onChange={(e) => handleInputChange(e)} />
-              {inputErrors.username && <p className='error'>{inputErrors.username}</p>}
-            </div>
-            <div>
-              <input type='password' name='password' value={inputValues.password} placeholder='Password...' onChange={(e) => handleInputChange(e)} />
-              {inputErrors.password && <p className='error'>{inputErrors.password}</p>}
-            </div>
-            <div className='buttonContainer'>
-              <input className='loginButton' type='submit' value='Log in' />
-            </div>
-          </form>
+          {
+            token
+              ? <form onSubmit={(e) => handleInputSubmit(e)}>
+                <div>
+                  <input type='text' name='username' value={inputValues.username} placeholder='Username...' onChange={(e) => handleInputChange(e)} />
+                  {inputErrors.username && <p className='error'>{inputErrors.username}</p>}
+                </div>
+                <div>
+                  <input type='password' name='password' value={inputValues.password} placeholder='Password...' onChange={(e) => handleInputChange(e)} />
+                  {inputErrors.password && <p className='error'>{inputErrors.password}</p>}
+                </div>
+                <div className='buttonContainer'>
+                  <input className='loginButton' type='submit' value='Log in' />
+                </div>
+              </form>
+              : <p>You already signed in</p>
+          }
         </div>
 
       </div>

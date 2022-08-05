@@ -17,9 +17,19 @@ function Home() {
 
   console.log('transactions', transactions)
 
+  const token = window.localStorage.getItem('token');
+
   return (
     <div className='home'>
-      <Balance />
+
+      {
+        token
+          ? <Balance />
+          : (
+            null
+          )
+      }
+
     </div>
   )
 }
