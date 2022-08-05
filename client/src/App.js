@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
-import CreateOperation from './components/CreateOperation/CreateOperation';
+import CreateTransaction from './components/CreateTransaction/CreateTransaction';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/createoperation' element={<CreateOperation />} />
+        <Route path='/createtransaction' element={<CreateTransaction />} />
       </Routes>
 
       <Footer />

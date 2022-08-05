@@ -22,6 +22,6 @@
     @include box(white, $red-color);
 }
 
-.operations {
+.transactions {
     @include box($brown-color, white);
 }

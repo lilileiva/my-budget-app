@@ -1,17 +1,17 @@
 import {
     BASE_URL,
-    GET_OPERATIONS    
+    GET_TRANSACTIONS    
 } from './types.js';
 
 
-export function getOperations() {
+export function getTransactions() {
     return async function (dispatch) {
         try {
-            return await fetch(`${BASE_URL}/operations/get`)
+            return await fetch(`${BASE_URL}/transactions/get`)
                 .then((res) => res.json())
                 .then((data) => {
                     dispatch({
-                        type: GET_OPERATIONS,
+                        type: GET_TRANSACTIONS,
                         payload: data
                     })
                 })
@@ -21,10 +21,10 @@ export function getOperations() {
     }
 }
 
-export function createOperation(inputValues) {
+export function createTransaction(inputValues) {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/operations/create`, {
+            await fetch(`${BASE_URL}/transactions/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -38,12 +38,12 @@ export function createOperation(inputValues) {
     }
 }
 
-export function editOperation(operationEdited) {
+export function editTransaction(transactionEdited) {
     return async function (dispatch) {
         try {
-            return await fetch(`${BASE_URL}/operations/edit`, {
+            return await fetch(`${BASE_URL}/transactions/edit`, {
                 method: "PUT",
-                body: operationEdited
+                body: transactionEdited
             })
                 .then((res) => res.json());
         } catch (error) {

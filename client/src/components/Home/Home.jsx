@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './Home.scss';
 import Balance from '../Balance/Balance';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOperations } from '../../redux/actions';
+import { getTransactions } from '../../redux/actions';
 
 
 function Home() {
@@ -10,12 +10,12 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOperations());
+    dispatch(getTransactions());
   }, [dispatch])
 
-  const operations = useSelector((state) => state.operations);
+  const transactions = useSelector((state) => state.transactions);
 
-  console.log('operations', operations)
+  console.log('transactions', transactions)
 
   return (
     <div className='home'>

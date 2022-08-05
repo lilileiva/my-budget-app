@@ -1,10 +1,10 @@
-const { Operation, User, Category } = require("../db.js");
+const { Transaction, User, Category } = require("../db.js");
 const { Sequelize } = require('sequelize');
 
 
-const getOperations = async (req, res) => {
+const getTransactions = async (req, res) => {
     try {        
-        const operations = await Operation.findAll({
+        const transactions = await Transaction.findAll({
             where: { userId: req.user },
             include: [
                 {
@@ -17,14 +17,14 @@ const getOperations = async (req, res) => {
                 }
             ]
         })
-        if (operations) return res.status(200).json(operations);
-        else return res.status(204).json('No operations');        
+        if (transactions) return res.status(200).json(transactions);
+        else return res.status(204).json('No transactions');        
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
 }
 
-const createOperation = async (req, res) => {
+const createTransaction = async (req, res) => {
     const { concept, amount, type, category } = req.body;
 
     try {
@@ -39,7 +39,7 @@ const createOperation = async (req, res) => {
 
             })            
             
-            const newOperation = await Operation.create({
+            const newTransaction = await Transaction.create({
                 concept,
                 amount: Number(amount),
                 type,
@@ -47,7 +47,7 @@ const createOperation = async (req, res) => {
                 userId: req.user
             })            
         } else {
-            const newOperation = await Operation.create({
+            const newTransaction = await Transaction.create({
                 concept,
                 amount: Number(amount),
                 type,
@@ -55,20 +55,20 @@ const createOperation = async (req, res) => {
                 userId: req.user
             })                        
         }
-        return res.status(201).send('Operation created');
+        return res.status(201).send('Transaction created');
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
 }
 
-const updateOperation = async (req, res) => {
+const updateTransaction = async (req, res) => {
     const { id } = req.params;
     const { concept, amount, category } = req.body;
 
     try {
-        const operation = await Operation.findByPk(id);
+        const transaction = await Transaction.findByPk(id);
 
-        if (operation.userId === req.user) {
+        if (transaction.userId === req.user) {
             const categoryFound = await Category.findOne({
                 where: { name: category }
             });
@@ -77,19 +77,19 @@ const updateOperation = async (req, res) => {
                 const newCategory = await Category.create({
                     name: category
                 })
-                operation.concept = concept;
-                operation.amount = amount;
-                operation.categoryId = newCategory.id;
-                await operation.save();
+                transaction.concept = concept;
+                transaction.amount = amount;
+                transaction.categoryId = newCategory.id;
+                await transaction.save();
             } else {            
-                operation.concept = concept;
-                operation.amount = amount;
-                operation.categoryId = categoryFound.id;
-                await operation.save();
+                transaction.concept = concept;
+                transaction.amount = amount;
+                transaction.categoryId = categoryFound.id;
+                await transaction.save();
             }
-            return res.status(201).send('Operation updated');
+            return res.status(201).send('Transaction updated');
         } else {
-            return res.status(200).send("You don't have access to update this operation");
+            return res.status(200).send("You don't have access to update this transaction");
         }
 
     } catch (error) {
@@ -99,7 +99,7 @@ const updateOperation = async (req, res) => {
 
 
 module.exports = {
-    getOperations,
-    createOperation,
-    updateOperation
+    getTransactions,
+    createTransaction,
+    updateTransaction
 }

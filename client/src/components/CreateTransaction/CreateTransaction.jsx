@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import './CreateOperation.scss';
-import { createOperation } from '../../redux/actions';
+import './CreateTransaction.scss';
+import { createTransaction } from '../../redux/actions';
 
 
-function CreateOperation() {
+function CreateTransaction() {
 
   const dispatch = useDispatch();
 
@@ -20,16 +20,16 @@ function CreateOperation() {
     let errors = {}
 
     if (!inputValues.concept) {
-      errors.concept = 'Debes completar este campo.';
+      errors.concept = 'You must fill concept field.';
     }
     if (!inputValues.amount) {
-      errors.amount = 'Debes ingresar un monto.';
+      errors.amount = 'You must fill amount field.';
     }
     if (!inputValues.type) {
-      errors.type = 'Debes indicar el tipo de operación.';
+      errors.type = 'You must fill type field.';
     }
     if (!inputValues.category) {
-      errors.category = 'Debes agregar una categoría.';
+      errors.category = 'You must fill category field.';
     }
 
     return errors;
@@ -52,40 +52,40 @@ function CreateOperation() {
 
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
-      dispatch(createOperation(inputValues));
+      dispatch(createTransaction(inputValues));
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
   
 
   return (
-    <div className='createOperation'>
+    <div className='createTransaction'>
       <div className='title'>
-        <h2>Nueva operación</h2>
+        <h2>New transaction</h2>
       </div>
       <div className='formContainer'>
         <form onSubmit={(e) => handleInputSubmit(e)}>
           <div className='inputContainer'>
-            <input type='text' name='concept' value={inputValues.concept} placeholder='Concepto...' onChange={(e) => handleInputChange(e)} />
+            <input type='text' name='concept' value={inputValues.concept} placeholder='Concept...' onChange={(e) => handleInputChange(e)} />
             {inputErrors.concept && <p className='error'>{inputErrors.concept}</p>}
           </div>
           <div>
-            <input type='text' name='amount' value={inputValues.amount} placeholder='Monto...' onChange={(e) => handleInputChange(e)} />
+            <input type='text' name='amount' value={inputValues.amount} placeholder='Amount...' onChange={(e) => handleInputChange(e)} />
             {inputErrors.amount && <p className='error'>{inputErrors.amount}</p>}
           </div>
           <div>
             <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
-              <option value='null'>Tipo...</option>
-              <option value='ingreso'>Ingreso</option>
-              <option value='egreso'>Egreso</option>
+              <option value='null'>Type...</option>
+              <option value='ingreso'>Income</option>
+              <option value='egreso'>Outcome</option>
             </select>
             {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
           </div>
           <div>
             <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
-              <option value='null'>Categorias...</option>
-              <option value='comidas'>Comidas</option>
-              <option value='luz'>Luz</option>
+              <option value='null'>Categories...</option>
+              <option value='comidas'>Category 1</option>
+              <option value='luz'>Category 2</option>
             </select>
             {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
           </div>
@@ -96,4 +96,4 @@ function CreateOperation() {
   )
 }
 
-export default CreateOperation;
+export default CreateTransaction;

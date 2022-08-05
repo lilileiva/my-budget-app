@@ -10,17 +10,17 @@ function Balance() {
   return (
     <div className='balanceContainer'>
       <div className='balance'>
-        <p>Balance total</p>
+        <p>My balance</p>
         <h2>$ 0</h2>
       </div>
 
-      <div className='operations'>
-        <h2>Últimas operaciones</h2>
-        <p>No hay operaciones registradas</p>
+      <div className='transactions'>
+        <h2>Last transactions</h2>
+        <p>No transactions are registered</p>
 
         <div className='buttonContainer'>
-          <button onClick={() => navigate('/createoperation')}>
-            Crear nueva operación
+          <button onClick={() => navigate('/createtransaction')}>
+            Crete new transaction
           </button>
         </div>
       </div>

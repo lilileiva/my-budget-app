@@ -10,11 +10,11 @@ function Navbar() {
   return (
     <div className='navbar'>
       <a onClick={() => navigate('/')}>
-        <h1>Presupuesto Personal</h1>
+        <h1>My Budget</h1>
       </a>
       <div className='buttons'>
-        <a  className='loginButton' onClick={() => navigate('/login')}>Iniciar sesión</a>
-        <a className='registerButton' onClick={() => navigate('/register')}>Registrarse</a>
+        <a  className='loginButton' onClick={() => navigate('/login')}>Sign in</a>
+        <a className='registerButton' onClick={() => navigate('/register')}>Sign up</a>
       </div>
     </div>
   )

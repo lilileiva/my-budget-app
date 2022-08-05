@@ -1,18 +1,18 @@
 import {
-    GET_OPERATIONS
+    GET_TRANSACTIONS
 } from '../actions/types.js';
 
 const initialState = {
-    operations: ""
+    transactions: ""
 }
 
 
 function rootReducer(state = initialState, action) {
     switch(action.type) {
-        case GET_OPERATIONS:
+        case GET_TRANSACTIONS:
             return {
                 ...state,
-                operations: []
+                transactions: []
             }
         default: return { ...state }
     }

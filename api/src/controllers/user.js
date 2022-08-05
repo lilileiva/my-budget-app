@@ -1,4 +1,4 @@
-const { Operation, User, Category } = require("../db.js");
+const { User } = require("../db.js");
 const { Sequelize } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -32,7 +32,7 @@ const login = async (req, res) => {
                 });
             }
         } else {
-            return res.status(200).send('User or password is invalid');
+            return res.status(200).json('User or password is invalid');
         }
     } catch (error) {        
         return res.status(500).json({ error: error.message }); 
@@ -60,7 +60,7 @@ const register = async (req, res) => {
                 username,
                 password: hash
             })
-            return res.status(201).send('User created');
+            return res.status(201).json('User created');
         }
     } catch (error) {
         return res.status(500).json({ error: error.message }); 

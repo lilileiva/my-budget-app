@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const operationRoutes = require('./operation');
+const transactionRoutes = require('./transaction');
 const userRoutes = require('./user');
 
 const routes = Router();
 
 
-routes.use('/operations', operationRoutes);
+routes.use('/transaction', transactionRoutes);
 routes.use('/users', userRoutes);
 
 

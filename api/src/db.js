@@ -31,27 +31,27 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 // Importo los models
-const { Operation, User, Category } = sequelize.models;
+const { Transaction, User, Category } = sequelize.models;
 
 //Relations
 /*----(Operation/User)----*/
-Operation.belongsTo(User, {
+Transaction.belongsTo(User, {
   foreignKey: 'userId',
   targetId: 'id'
 });
 
-User.hasMany(Operation, {
+User.hasMany(Transaction, {
   foreignKey: 'userId',
   sourceKey: 'id'
 });
 
 /*----(Operation/Category)----*/
-Operation.belongsTo(Category, {
+Transaction.belongsTo(Category, {
   foreignKey: 'categoryId',
   targetId: 'id'
 });
 
-Category.hasMany(Operation, {
+Category.hasMany(Transaction, {
   foreignKey: 'categoryId',
   sourceKey: 'id'
 });
