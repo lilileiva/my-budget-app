@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
   
   sequelize.define('Operation', {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     concept: {
       type: DataTypes.STRING,

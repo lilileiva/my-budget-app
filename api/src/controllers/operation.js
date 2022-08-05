@@ -4,61 +4,102 @@ const { Sequelize } = require('sequelize');
 
 const getOperations = async (req, res) => {
     try {        
-        const operations = await Operation.findAll()
-        // const operations = await Operation.findAll({
-        //     include: [
-        //         {
-        //             model: Category,
-        //             attributes: ["id", "name"]
-        //         },
-        //         {
-        //             model: User,
-        //             attributes: ["id", "username"]
-        //         }
-        //     ]
-        // })
-        if (operations) return res.status(200).json(operations);        
-        else return res.status(204).json('No operations');
+        const operations = await Operation.findAll({
+            where: { userId: req.user },
+            include: [
+                {
+                    model: Category,
+                    attributes: ["id", "name"]
+                },
+                {
+                    model: User,
+                    attributes: ["id", "username"]
+                }
+            ]
+        })
+        if (operations) return res.status(200).json(operations);
+        else return res.status(204).json('No operations');        
     } catch (error) {
-        console.log(error)       
-        return res.status(404).json({ error: 'There was an error...' });
+        return res.status(500).json({ error: error.message });
     }
 }
 
-const createOperation = async(req, res) => {    
+const createOperation = async (req, res) => {
     const { concept, amount, type, category } = req.body;
-    
-    try {                
-        const newOperation = await Operation.create({
-            concept,
-            amount: Number(amount),
-            type
-        })
 
-        const categoryFound = await Category.findAll({
+    try {
+        const categoryFound = await Category.findOne({
             where: {
                 name: category
             }
         });
         if (!categoryFound) {
-            await newOperation.setCategory(categoryFound);
-            await newOperation.setUser(req.user);
-        } else {
             const newCategory = await Category.create({
-                name: category
-            })
-            await newOperation.setCategory(newCategory);
-        }
+                name: category,
 
+            })            
+            
+            const newOperation = await Operation.create({
+                concept,
+                amount: Number(amount),
+                type,
+                categoryId: newCategory.id,
+                userId: req.user
+            })            
+        } else {
+            const newOperation = await Operation.create({
+                concept,
+                amount: Number(amount),
+                type,
+                categoryId: categoryFound.id,
+                userId: req.user
+            })                        
+        }
         return res.status(201).send('Operation created');
     } catch (error) {
-        console.log(error)
-        // return res.status(404).json({ error: 'There was an error...' });        
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+const updateOperation = async (req, res) => {
+    const { id } = req.params;
+    const { concept, amount, category } = req.body;
+
+    try {
+        const operation = await Operation.findByPk(id);
+
+        if (operation.userId === req.user) {
+            const categoryFound = await Category.findOne({
+                where: { name: category }
+            });
+    
+            if (!categoryFound) {
+                const newCategory = await Category.create({
+                    name: category
+                })
+                operation.concept = concept;
+                operation.amount = amount;
+                operation.categoryId = newCategory.id;
+                await operation.save();
+            } else {            
+                operation.concept = concept;
+                operation.amount = amount;
+                operation.categoryId = categoryFound.id;
+                await operation.save();
+            }
+            return res.status(201).send('Operation updated');
+        } else {
+            return res.status(200).send("You don't have access to update this operation");
+        }
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
     }
 }
 
 
-module.exports = {    
+module.exports = {
     getOperations,
-    createOperation
+    createOperation,
+    updateOperation
 }

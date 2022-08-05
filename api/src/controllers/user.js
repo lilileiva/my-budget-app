@@ -34,9 +34,8 @@ const login = async (req, res) => {
         } else {
             return res.status(200).send('User or password is invalid');
         }
-    } catch (error) {
-        console.log(error)
-        return res.status(404).json({ error: 'There was an error...' });
+    } catch (error) {        
+        return res.status(500).json({ error: error.message }); 
     }
 }
 
@@ -64,7 +63,7 @@ const register = async (req, res) => {
             return res.status(201).send('User created');
         }
     } catch (error) {
-        return res.status(404).json({ error: 'There was an error...' });
+        return res.status(500).json({ error: error.message }); 
     }
 }
 

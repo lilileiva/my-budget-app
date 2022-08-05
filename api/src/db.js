@@ -33,9 +33,29 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Importo los models
 const { Operation, User, Category } = sequelize.models;
 
-//Relaciones
-Operation.belongsTo(User, { through: 'Operation_User' });
-Category.belongsToMany(Operation, { through: 'Category_Operation' });
+//Relations
+/*----(Operation/User)----*/
+Operation.belongsTo(User, {
+  foreignKey: 'userId',
+  targetId: 'id'
+});
+
+User.hasMany(Operation, {
+  foreignKey: 'userId',
+  sourceKey: 'id'
+});
+
+/*----(Operation/Category)----*/
+Operation.belongsTo(Category, {
+  foreignKey: 'categoryId',
+  targetId: 'id'
+});
+
+Category.hasMany(Operation, {
+  foreignKey: 'categoryId',
+  sourceKey: 'id'
+});
+/*--------*/
 
 
 module.exports = {
