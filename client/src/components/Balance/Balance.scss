@@ -24,4 +24,23 @@
 
 .transactions {
     @include box($brown-color, white);
+
+    ul {
+        list-style: none;
+        padding: 0;
+        overflow: scroll;
+    }
+
+    li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        cursor: pointer;
+
+        b,
+        p {
+            width: 100px;
+            text-overflow: ellipsis;
+        }
+    }
 }

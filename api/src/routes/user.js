@@ -7,7 +7,7 @@ const {
 const userRoutes = Router();
 
 
-userRoutes.get('/login', login);
+userRoutes.post('/login', login);
 userRoutes.post('/register', register);
 
 

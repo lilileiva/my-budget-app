@@ -50,14 +50,12 @@ function Login() {
     try {
       const response = await axios.post(`${BASE_URL}/users/login`, inputValues)
 
-      console.log(response.data)
-
-      if (response.data.status === 200) {
+      if (response.status === 200) {
         const token = response.data.token;
         window.localStorage.setItem('token', token);
         navigate('/');
       }
-      else if (response.data.status === 404) {
+      else if (response.status === 404) {
         console.log('Username or password invalid')
       }
     } catch (error) {

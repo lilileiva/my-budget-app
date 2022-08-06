@@ -6,7 +6,7 @@ const categoryRoutes = require('./category');
 const routes = Router();
 
 
-routes.use('/transaction', transactionRoutes);
+routes.use('/transactions', transactionRoutes);
 routes.use('/users', userRoutes);
 routes.use('/categories', categoryRoutes);
 

@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './CreateTransaction.scss';
-import { createTransaction } from '../../redux/actions';
+import { createTransaction, getCategories } from '../../redux/actions';
 
 
 function CreateTransaction() {
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch])
+
+  const categories = useSelector((state) => state.categories);
 
   const [inputValues, setInputValues] = useState({
     concept: "",
@@ -53,6 +59,14 @@ function CreateTransaction() {
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
       dispatch(createTransaction(inputValues));
+      setInputValues({
+        ...inputValues,
+        concept: "",
+        amount: "",
+        type: "",
+        category: ""
+      })
+
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
@@ -79,16 +93,23 @@ function CreateTransaction() {
               <div>
                 <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
                   <option value='null'>Type...</option>
-                  <option value='ingreso'>Income</option>
-                  <option value='egreso'>Outcome</option>
+                  <option value='income'>Income</option>
+                  <option value='egress'>Egress</option>
                 </select>
                 {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
               </div>
               <div>
                 <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
                   <option value='null'>Categories...</option>
-                  <option value='comidas'>Category 1</option>
-                  <option value='luz'>Category 2</option>
+                  {
+                    categories
+                      ? <>
+                        {categories.map((category) => (
+                          <option value={category.name}>{category.name}</option>
+                        ))}
+                      </>
+                      : <option value='null'>There are not categories</option>
+                  }
                 </select>
                 {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
               </div>
