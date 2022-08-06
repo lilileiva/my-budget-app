@@ -1,9 +1,11 @@
 import {
-    GET_TRANSACTIONS
+    GET_TRANSACTIONS,
+    GET_CATEGORIES
 } from '../actions/types.js';
 
 const initialState = {
-    transactions: ""
+    transactions: [],
+    categories: []
 }
 
 
@@ -12,7 +14,12 @@ function rootReducer(state = initialState, action) {
         case GET_TRANSACTIONS:
             return {
                 ...state,
-                transactions: []
+                transactions: action.payload
+            }
+        case GET_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
             }
         default: return { ...state }
     }

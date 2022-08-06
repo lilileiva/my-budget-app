@@ -85,7 +85,8 @@ function Login() {
         <div className='loginForm'>
           {
             token
-              ? <form onSubmit={(e) => handleInputSubmit(e)}>
+              ? <p>You already signed in</p>
+              : <form onSubmit={(e) => handleInputSubmit(e)}>
                 <div>
                   <input type='text' name='username' value={inputValues.username} placeholder='Username...' onChange={(e) => handleInputChange(e)} />
                   {inputErrors.username && <p className='error'>{inputErrors.username}</p>}
@@ -98,7 +99,6 @@ function Login() {
                   <input className='loginButton' type='submit' value='Log in' />
                 </div>
               </form>
-              : <p>You already signed in</p>
           }
         </div>
 

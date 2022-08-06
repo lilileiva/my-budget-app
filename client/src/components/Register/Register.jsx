@@ -71,26 +71,26 @@ function Register() {
         <div className='registerForm'>
           {
             token
-            ? <form onSubmit={(e) => handleInputSubmit(e)}>
-            <div>
-              <input type='text' name='username' value={inputValues.username} placeholder='Username...' onChange={(e) => handleInputChange(e)} />
-              {inputErrors.username && <p className='error'>{inputErrors.username}</p>}
-            </div>
-            <div>
-              <input type='password' name='password' value={inputValues.password} placeholder='Password...' onChange={(e) => handleInputChange(e)} />
-              {inputErrors.password && <p className='error'>{inputErrors.password}</p>}
-            </div>
-            <div>
-              <input type='password' name='repeatpassword' value={inputValues.repeatpassword} placeholder='Repeat password...' onChange={(e) => handleInputChange(e)} />
-              {inputErrors.repeatpassword && <p className='error'>{inputErrors.repeatpassword}</p>}
-            </div>
-            <div className='buttonContainer'>
-              <input className='signUpButton' type='submit' value='Sign up' />
-            </div>
-          </form>
-          : <p>You can't sign up now because ou are alreade in a session</p>
+              ? <p>You can't sign up now because you are already in a session</p>
+              : <form onSubmit={(e) => handleInputSubmit(e)}>
+                <div>
+                  <input type='text' name='username' value={inputValues.username} placeholder='Username...' onChange={(e) => handleInputChange(e)} />
+                  {inputErrors.username && <p className='error'>{inputErrors.username}</p>}
+                </div>
+                <div>
+                  <input type='password' name='password' value={inputValues.password} placeholder='Password...' onChange={(e) => handleInputChange(e)} />
+                  {inputErrors.password && <p className='error'>{inputErrors.password}</p>}
+                </div>
+                <div>
+                  <input type='password' name='repeatpassword' value={inputValues.repeatpassword} placeholder='Repeat password...' onChange={(e) => handleInputChange(e)} />
+                  {inputErrors.repeatpassword && <p className='error'>{inputErrors.repeatpassword}</p>}
+                </div>
+                <div className='buttonContainer'>
+                  <input className='signUpButton' type='submit' value='Sign up' />
+                </div>
+              </form>
           }
-          
+
         </div>
 
       </div>

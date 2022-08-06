@@ -7,6 +7,7 @@ import Footer from './components/Footer/Footer';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import CreateTransaction from './components/CreateTransaction/CreateTransaction';
+import EditTransaction from './components/EditTransaction/EditTransaction';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/createtransaction' element={<CreateTransaction />} />
+        <Route path='/createtransaction/create' element={<CreateTransaction />} />
+        <Route path='/transaction/edit/:id' element={<EditTransaction />} />
       </Routes>
 
       <Footer />
