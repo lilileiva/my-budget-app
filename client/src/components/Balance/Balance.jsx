@@ -14,16 +14,17 @@ function Balance() {
     dispatch(getTransactions());
   }, [dispatch])
 
-  let transactions = useSelector((state) => state.transactions);
+  const transactions = useSelector((state) => state.transactions);
 
   /*----------------CALCALCULATING TOTAL BALANCE-----------*/
   let totalBalance = 0;
-<
-  if (transactions.length > 0) {
+
+  if (transactions.length !== 0 && Object.keys(transactions)[0] !== 'error') {
     transactions.map((transaction) => (
       (transaction.type === 'income') ? totalBalance += transaction.amount : totalBalance -= transaction.amount
     ))
   }
+
   /*----------------END CALCALCULATING TOTAL BALANCE-----------*/
 
   return (

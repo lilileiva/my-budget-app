@@ -31,7 +31,7 @@ function CreateTransaction() {
     if (!inputValues.amount) {
       errors.amount = 'You must fill amount field.';
     }
-    if (inputValues.amount && inputValues.amount !== Number(inputValues.amount)) {
+    if (inputValues.amount && !(inputValues.amount == Number(inputValues.amount))) {
       errors.amount = 'Amount must be a number.';
     }
     if (!inputValues.type) {
@@ -80,8 +80,6 @@ function CreateTransaction() {
   }
 
   const token = window.localStorage.getItem('token');
-
-  console.log(inputValues)
 
   return (
     <div className='createTransaction'>
