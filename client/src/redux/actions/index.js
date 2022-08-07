@@ -5,31 +5,6 @@ import {
 } from './types.js';
 
 
-// export function getTransactions() {
-//     return async function (dispatch) {
-//         try {
-//             const http = new XMLHttpRequest();
-//             const url = `${BASE_URL}/transactions/get`
-
-//             http.open("GET", url);
-//             http.setRequestHeader("Accept", "application/json");
-//             http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
-
-//             http.onreadystatechange = function () {
-//                 if (this.readyState == 4 && this.status == 200) {
-//                     dispatch({
-//                         type: GET_TRANSACTIONS,
-//                         payload: this.response
-//                     })
-//                 }
-//             }
-
-//             http.send();
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }
 export function getTransactions() {
     return async function (dispatch) {
         try {
@@ -98,24 +73,6 @@ export function getCategories() {
                         payload: data
                     })
                 })
-
-            // const http = new XMLHttpRequest();
-            // const url = `${BASE_URL}/categories/get`
-
-            // http.open("GET", url);
-
-            // http.setRequestHeader("Accept", "application/json");
-
-            // http.onreadystatechange = function () {
-            //     if (this.readyState == 4 && this.status == 200) {
-            //         dispatch({
-            //             type: GET_CATEGORIES,
-            //             payload: this.responseText
-            //         })
-            //     }
-            // }            
-
-            // http.send();
         } catch (error) {
             console.log(error)
         }

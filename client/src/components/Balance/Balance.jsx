@@ -15,7 +15,6 @@ function Balance() {
   }, [dispatch])
 
   let transactions = useSelector((state) => state.transactions);
-  transactions.length !== 0 ? transactions = transactions.slice(0, 10) : null;
 
 /*----------------CALCALCULATING TOTAL BALANCE-----------*/
   let totalBalance = 0;
@@ -43,7 +42,7 @@ function Balance() {
           </li>
           {
             transactions.length !== 0
-              ? transactions.map((transaction) => (
+              ? transactions.slice(0, 10).map((transaction) => (
                 <li onClick={() => navigate(`/transaction/edit/${transaction.id}`)}>
                   <p>{transaction.concept}</p>
                   <p>${transaction.amount}</p>
