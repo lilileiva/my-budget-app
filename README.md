@@ -13,7 +13,7 @@
     </a>
     <span> | </span>
     <a href="https://github.com/lilileiva/my-budget-app">
-      Solution
+      Repository
     </a>
   </h3>
 </div>
@@ -92,4 +92,4 @@ $ npm start
 - Portfolio [wbsite](https://lilianaleiva.vercel.app)
 - LinkedIn [@lilileiva](https://www.linkedin.com/in/lilianaleiva/)
 - GitHub [@lilileiva](https://github.com/lilileiva)
--Email: lilianadelcleiva@gmail.com
+- Email: lilianadelcleiva@gmail.com
