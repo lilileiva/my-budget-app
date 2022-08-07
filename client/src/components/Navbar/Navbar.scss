@@ -45,3 +45,30 @@
 .buttons a:first-of-type {
     margin-right: 2rem;
 }
+
+@media (max-width: 480px) {
+    .navbar {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    
+        h1 {
+            font-size: 30px;
+            color: $brown-color;
+            cursor: pointer;
+        }
+    }
+    
+    .buttons {
+        cursor: pointer;
+    
+        a {
+            text-decoration: none;
+            color: $brown-color;
+            font-size: 15px;
+        }
+
+    }
+    .buttons a:first-of-type {
+        margin-right: 1rem;
+    }
+}

@@ -23,7 +23,7 @@ import {
 //                     })
 //                 }
 //             }
-            
+
 //             http.send();
 //         } catch (error) {
 //             console.log(error)
@@ -37,12 +37,12 @@ export function getTransactions() {
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             })
                 .then((res) => res.json())
-            .then((data) => {
-                dispatch({
-                    type: GET_TRANSACTIONS,
-                    payload: data
+                .then((data) => {
+                    dispatch({
+                        type: GET_TRANSACTIONS,
+                        payload: data
+                    })
                 })
-            })
         } catch (error) {
             console.log(error)
         }
@@ -70,17 +70,16 @@ export function createTransaction(inputValues) {
     }
 }
 
-export function editTransaction(transactionEdited) {
+export function editTransaction(transactionEdited, id) {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/transactions/edit`,
+            await fetch(`${BASE_URL}/transactions/update/${id}`,
                 {
                     method: "PUT",
                     body: transactionEdited,
                     headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
                 }
             )
-
                 .then((res) => res.json());
         } catch (error) {
             console.log(error)

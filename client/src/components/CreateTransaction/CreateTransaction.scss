@@ -4,7 +4,7 @@
     @include background-properties();
 
     .title {
-        @include box(white, $red-color);
+        @include box(white, $red-color, 500px);
     }
     
     .formContainer {
@@ -12,7 +12,7 @@
             display: flex;
             flex-direction: column;      
     
-            @include box($brown-color, white);
+            @include box($brown-color, white, 500px);
         }
     }
 
@@ -49,5 +49,82 @@
         position: absolute;
         color: $red-error-color;
         margin: 0;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .createTransaction {
+        @include background-properties();
+    
+        .title {
+            @include box(white, $red-color, 350px);
+        }
+        
+        .formContainer {
+            form {
+                display: flex;
+                flex-direction: column;      
+        
+                @include box($brown-color, white, 350px);
+            }
+        }
+    
+        .inputContainer {
+            width: 350px;
+        }
+    
+        input,
+        select {
+            margin-top: 2rem;
+            font-size: 20px;
+            color: gray;
+                   
+        }
+    
+        input[type=text] {
+            width: 340px; 
+        }
+        select {
+            width: 350px; 
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .createTransaction {
+        @include background-properties();
+    
+        .title {
+            @include box(white, $red-color, 270px);
+        }
+        
+        .formContainer {
+            form {
+                display: flex;
+                flex-direction: column;      
+        
+                @include box($brown-color, white, 270px);
+            }
+        }
+    
+        .inputContainer {
+            width: 270px;
+        }
+    
+        input,
+        select {
+            margin-top: 2rem;
+            font-size: 20px;
+            color: gray;
+                   
+        }
+    
+        input[type=text] {
+            width: 260px; 
+        }
+        select {
+            width: 270px; 
+        }
     }
 }

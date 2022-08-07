@@ -9,7 +9,7 @@ function Navbar() {
 
   const signOut = () => {
     window.localStorage.clear();
-    navigate('/')
+    navigate('/login');
   }
 
   const token = window.localStorage.getItem('token');

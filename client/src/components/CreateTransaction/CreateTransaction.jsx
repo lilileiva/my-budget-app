@@ -113,7 +113,7 @@ function CreateTransaction() {
                 </select>
                 {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
               </div>
-              <input type='submit' value='Crear' />
+              <input type='submit' value='Create' />
             </form>
             : <>
               <p>You should sign in to create a transaction</p>

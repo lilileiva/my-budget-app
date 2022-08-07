@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './EditTransaction.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editTransaction } from '../../redux/actions';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getCategories } from '../../redux/actions';
 
 
 function EditTransaction() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+    useEffect(() => {
+      dispatch(getCategories());
+    }, [dispatch]);
+
+    const categories = useSelector((state) => state.categories);
 
     const [inputValues, setInputValues] = useState({
       concept: "",
@@ -47,12 +57,15 @@ function EditTransaction() {
   
     useEffect(() => {
       if (Object.keys(inputErrors).length === 0 && isSubmit) {
-        dispatch(editTransaction(inputValues));
+        dispatch(editTransaction(inputValues, id));
+        navigate('/');
       }
       setIsSubmit(false);
     }, [inputErrors, isSubmit]);
   
     const token = window.localStorage.getItem('token');
+
+    console.log(inputValues)
   
     return (
       <div className='createTransaction'>
@@ -74,12 +87,19 @@ function EditTransaction() {
                 <div>
                   <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
                     <option value='null'>Categories...</option>
-                    <option value='comidas'>Category 1</option>
-                    <option value='luz'>Category 2</option>
+                    {
+                    categories
+                      ? <>
+                        {categories.map((category) => (
+                          <option value={category.name}>{category.name}</option>
+                        ))}
+                      </>
+                      : <option value='null'>There are not categories</option>
+                  }
                   </select>
                   {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
                 </div>
-                <input type='submit' value='Crear' />
+                <input type='submit' value='Edit' />
               </form>
               : <>
                 <p>404 not found</p>

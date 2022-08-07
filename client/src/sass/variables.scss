@@ -10,10 +10,10 @@ $blue-color-hover: #619ca4;
 
 
 
-@mixin box($color, $background) {
+@mixin box($color, $background, $width) {
     color: $color;
     background-color: $background;
-    width: 500px;
+    width: $width;
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     padding-right: 2rem;

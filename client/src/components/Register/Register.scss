@@ -1,21 +1,3 @@
-// .register {
-//     display: flex;
-//     flex-direction: column;    
-//     justify-content: center;
-//     align-items: center;
-//     height: 70%;
-
-//     form {
-//         display: flex;
-//         flex-direction: column;
-//         width: 300px;    
-//     }
-
-//     input {
-//         margin-top: 2rem;
-//     }
-// }
-
 @import '../../sass/variables.scss';
 
 
@@ -31,8 +13,8 @@
         width: 300px;
     }
 
-    input {   
-        width: 100%;     
+    input {
+        width: 100%;
         margin-top: 2rem;
 
     }
@@ -58,12 +40,12 @@
 }
 
 .signUp {
-    @include box(white, $red-color);
+    @include box(white, $red-color, 500px);
 }
 
 .registerForm {
-    @include box($brown-color, white);
-    
+    @include box($brown-color, white, 500px);
+
     display: flex;
     justify-content: center;
 
@@ -76,4 +58,114 @@
     position: absolute;
     color: $red-error-color;
     margin: 0;
+}
+
+
+@media (max-width: 850px) {
+    .registerContainer {
+        @include background-properties();
+    }
+
+    .register {
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        width: 300px;
+
+        .buttonContainer {
+            width: inherit;
+            display: flex;
+            justify-content: center;
+
+            .signUpButton {
+                @include blue-button();
+                margin-top: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            .signUpButton:hover {
+                @include blue-button-hover();
+            }
+        }
+
+    }
+
+    .signUp {
+        @include box(white, $red-color, 300px);
+    }
+
+    .registerForm {
+        @include box($brown-color, white, 300px);
+
+        display: flex;
+        justify-content: center;
+
+        input {
+            font-size: 20px;
+        }
+    }
+}
+
+
+@media (max-width: 480px) {
+    .registerContainer {
+        @include background-properties();
+    }
+
+    .register {
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 250px;
+        }
+
+        input {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        width: 300px;
+
+        .buttonContainer {
+            width: inherit;
+            display: flex;
+            justify-content: center;
+
+            .signUpButton {
+                @include blue-button();
+                margin-top: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            .signUpButton:hover {
+                @include blue-button-hover();
+            }
+        }
+
+    }
+
+    .signUp {
+        @include box(white, $red-color, 250px);
+    }
+
+    .registerForm {
+        @include box($brown-color, white, 250px);
+
+        display: flex;
+        justify-content: center;
+
+        input {
+            font-size: 15px;
+        }
+    }
 }

@@ -14,7 +14,8 @@ function Balance() {
     dispatch(getTransactions());
   }, [dispatch])
 
-  const transactions = useSelector((state) => state.transactions);
+  let transactions = useSelector((state) => state.transactions);
+  transactions = transactions.slice(0, 10);
 
   console.log('transactions', transactions)
 
