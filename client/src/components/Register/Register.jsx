@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/actions';
 import { motion } from "framer-motion";
+import Alert from '../Alert/Alert';
 
 
 function Register() {
@@ -52,10 +53,18 @@ function Register() {
     setIsSubmit(true);
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
       dispatch(register(inputValues));
-      navigate('/');
+      setIsOpen(true);
+      setInputValues({
+        ...inputValues,
+        username: "",
+        password: "",
+        repeatpassword: ""
+      })      
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
@@ -99,6 +108,9 @@ function Register() {
         </div>
 
       </motion.div>
+      {
+        isOpen && <Alert text='User created succesfully!' setIsOpen={setIsOpen} />
+      }
     </div>
   )
 }

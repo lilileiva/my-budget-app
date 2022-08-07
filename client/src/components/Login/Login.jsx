@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../redux/actions/types';
 import axios from 'axios';
 import { motion } from "framer-motion";
+import Alert from '../Alert/Alert';
 
 
 function Login() {
@@ -44,8 +45,9 @@ function Login() {
     setIsSubmit(true);
   }
 
-  const loginRequest = async () => {
+  const [isOpen, setIsOpen] = useState(false);  
 
+  const loginRequest = async () => {
     try {
       const response = await axios.post(`${BASE_URL}/users/login`, inputValues)
 
@@ -55,7 +57,7 @@ function Login() {
         navigate('/');
       }
       else if (response.status === 404) {
-        console.log('Username or password invalid')
+        setIsOpen(true);        
       }
     } catch (error) {
       console.log(error)
@@ -104,7 +106,10 @@ function Login() {
           }
         </div>
 
-      </motion.div>
+      </motion.div>    
+      {
+        isOpen && <Alert text='Username or password invalid' setIsOpen={setIsOpen} />
+      }      
     </div>
   )
 }
