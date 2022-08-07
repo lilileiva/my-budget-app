@@ -16,12 +16,14 @@ function Balance() {
 
   let transactions = useSelector((state) => state.transactions);
 
-/*----------------CALCALCULATING TOTAL BALANCE-----------*/
+  /*----------------CALCALCULATING TOTAL BALANCE-----------*/
   let totalBalance = 0;
-
-  transactions.length !== 0 && transactions.map((transaction) => (
-    (transaction.type === 'income') ? totalBalance += transaction.amount : totalBalance -= transaction.amount
-  ))
+<
+  if (transactions.length > 0) {
+    transactions.map((transaction) => (
+      (transaction.type === 'income') ? totalBalance += transaction.amount : totalBalance -= transaction.amount
+    ))
+  }
   /*----------------END CALCALCULATING TOTAL BALANCE-----------*/
 
   return (
@@ -41,7 +43,7 @@ function Balance() {
             <b>Category</b>
           </li>
           {
-            transactions.length !== 0
+            transactions.length > 0
               ? transactions.slice(0, 10).map((transaction) => (
                 <li onClick={() => navigate(`/transaction/edit/${transaction.id}`)}>
                   <p>{transaction.concept}</p>
