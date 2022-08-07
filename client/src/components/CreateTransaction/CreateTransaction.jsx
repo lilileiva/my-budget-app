@@ -31,6 +31,9 @@ function CreateTransaction() {
     if (!inputValues.amount) {
       errors.amount = 'You must fill amount field.';
     }
+    if (inputValues.amount && inputValues.amount !== Number(inputValues.amount)) {
+      errors.amount = 'Amount must be a number.';
+    }
     if (!inputValues.type) {
       errors.type = 'You must fill type field.';
     }
