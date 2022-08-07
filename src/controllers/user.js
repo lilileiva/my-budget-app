@@ -52,7 +52,7 @@ const register = async (req, res) => {
         })
 
         if (user) {
-            return res.status(200).send('User already exists');
+            return res.status(200).json('User already exists');
         } else {
             const saltRounds = 10;
             const hash = bcrypt.hashSync(password, saltRounds)
