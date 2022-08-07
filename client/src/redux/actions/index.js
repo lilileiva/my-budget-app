@@ -35,18 +35,22 @@ export function getTransactions() {
 export function createTransaction(inputValues) {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/transactions/create`,
-                {
-                    method: "POST",
-                    body: JSON.stringify(inputValues),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    },
-                }
+            const post = JSON.stringify(inputValues)
 
-            )
-                .then((res) => res.json());
+            const http = new XMLHttpRequest();
+            const url = `${BASE_URL}/transactions/create`
+
+            http.open("POST", url, true);
+            http.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+
+            http.onload = function () {
+                if(http.status === 201) {
+                    console.log("Transaction successfully created!") 
+                }
+            }
+
+            http.send(post);
         } catch (error) {
             console.log(error)
         }
@@ -56,17 +60,22 @@ export function createTransaction(inputValues) {
 export function editTransaction(inputValues, id) {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/transactions/update/${id}`,
-                {
-                    method: "PUT",
-                    body: JSON.stringify(inputValues),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                const post = JSON.stringify(inputValues)
+
+                const http = new XMLHttpRequest();
+                const url = `${BASE_URL}/transactions/update/${id}`
+    
+                http.open("PUT", url, true);
+                http.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+                http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+    
+                http.onload = function () {
+                    if(http.status === 201) {
+                        console.log("Transaction successfully edited!") 
                     }
                 }
-            )
-                .then((res) => res.json());
+    
+                http.send(post);
         } catch (error) {
             console.log(error)
         }
