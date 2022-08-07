@@ -10,7 +10,7 @@ require('./db.js');
 //server initialize
 const app = express();
 app.name = 'API';
-app.set( 'port', process.env.PORT || 3001 )
+app.set( 'port', process.env.PORT)
 
 //middlewares
 app.use(cors())
