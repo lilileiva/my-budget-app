@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './CreateTransaction.scss';
 import { createTransaction, getCategories } from '../../redux/actions';
+import Alert from '../Alert/Alert';
 
 
 function CreateTransaction() {
@@ -59,9 +60,12 @@ function CreateTransaction() {
     setIsSubmit(true);
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
       dispatch(createTransaction(inputValues));
+      setIsOpen(true);
       setInputValues({
         ...inputValues,
         concept: "",
@@ -112,15 +116,15 @@ function CreateTransaction() {
                     ? (
                       <div className='category'>
                         <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
-                          <option value='null'>Categories...</option>
+                          <option>Categories...</option>
                           {
-                            categories
+                            categories.length !== 0
                               ? <>
                                 {categories.map((category) => (
                                   <option value={category.name}>{category.name}</option>
                                 ))}
                               </>
-                              : <option value='null'>There are not categories</option>
+                              : <option>There are not categories</option>
                           }
                         </select>
 
@@ -147,6 +151,9 @@ function CreateTransaction() {
             </>
         }
       </div>
+      {
+        isOpen && <Alert text='Transaction created succesfully!' setIsOpen={setIsOpen} />
+      }
     </div>
   )
 }
