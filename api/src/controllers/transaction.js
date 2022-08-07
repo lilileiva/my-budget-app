@@ -91,7 +91,6 @@ const updateTransaction = async (req, res) => {
         } else {
             return res.status(200).json("You don't have access to update this transaction");
         }
-
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

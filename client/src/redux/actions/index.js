@@ -30,11 +30,11 @@ export function createTransaction(inputValues) {
             await fetch(`${BASE_URL}/transactions/create`,
                 {
                     method: "POST",
+                    body: JSON.stringify(inputValues),
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     },
-                    body: JSON.stringify(inputValues),
                 }
 
             )
@@ -45,14 +45,17 @@ export function createTransaction(inputValues) {
     }
 }
 
-export function editTransaction(transactionEdited, id) {
+export function editTransaction(inputValues, id) {
     return async function (dispatch) {
         try {
             await fetch(`${BASE_URL}/transactions/update/${id}`,
                 {
                     method: "PUT",
-                    body: transactionEdited,
-                    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+                    body: JSON.stringify(inputValues),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
                 }
             )
                 .then((res) => res.json());

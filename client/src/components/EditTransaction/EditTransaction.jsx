@@ -61,7 +61,13 @@ function EditTransaction() {
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
       dispatch(editTransaction(inputValues, id));
-      navigate('/');
+      // navigate('/');
+      setInputValues({
+        ...inputValues,
+        concept: "",
+        amount: "",        
+        category: ""
+      })
       setIsOpen(true);
     }
     setIsSubmit(false);
