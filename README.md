@@ -83,6 +83,8 @@ $ npm start
 - [Sequelize](https://sequelize.org/)
 - [Axios](https://axios-http.com/docs/intro)
 - [SASS](https://sass-lang.com/)
+- [Google Fonts](https://fonts.google.com/)
+- [Framer Motion](https://www.framer.com/motion/)
 
 
 ## Contact
