@@ -73,7 +73,6 @@ function CreateTransaction() {
         type: "",
         category: ""
       })
-
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
