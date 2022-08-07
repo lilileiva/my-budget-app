@@ -15,7 +15,7 @@ function Balance() {
   }, [dispatch])
 
   let transactions = useSelector((state) => state.transactions);
-  transactions = transactions.slice(0, 10);
+  transactions.length !== 0 ? transactions = transactions.slice(0, 10) : null;
 
 /*----------------CALCALCULATING TOTAL BALANCE-----------*/
   let totalBalance = 0;
