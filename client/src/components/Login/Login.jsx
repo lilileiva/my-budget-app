@@ -49,15 +49,14 @@ function Login() {
 
   const loginRequest = async () => {
     try {
-      const response = await axios.post(`${BASE_URL}/users/login`, inputValues)
+      const response = await axios.post(`${BASE_URL}/users/login`, inputValues);      
+      const token = response.data.token;              
 
-      if (response.status === 200) {
-        const token = response.data.token;
+      if (response.status === 200 && token) {        
         window.localStorage.setItem('token', token);
         navigate('/');
-      }
-      else if (response.status === 404) {
-        setIsOpen(true);        
+      } else {
+        if (!isOpen) setIsOpen(true);        
       }
     } catch (error) {
       console.log(error)
@@ -108,7 +107,7 @@ function Login() {
 
       </motion.div>    
       {
-        isOpen && <Alert text='Username or password invalid' setIsOpen={setIsOpen} />
+        isOpen && <Alert text='Incorrect username or password' setIsOpen={setIsOpen} />
       }      
     </div>
   )

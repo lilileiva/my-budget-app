@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/actions';
 import { motion } from "framer-motion";
 import Alert from '../Alert/Alert';
+import axios from 'axios';
+import { BASE_URL } from '../../redux/actions/types';
 
 
 function Register() {
@@ -53,18 +55,34 @@ function Register() {
     setIsSubmit(true);
   }
 
+  const [text, setText] = useState("")
   const [isOpen, setIsOpen] = useState(false);
+
+  const registerRequest = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/users/register`, inputValues);
+
+      if (response.status === 201) {
+        setText('User created succesfully!');
+        setIsOpen(true);
+        setInputValues({
+          ...inputValues,
+          username: "",
+          password: "",
+          repeatpassword: ""
+        })
+      } else {
+        setText('Username is not available');
+        setIsOpen(true);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
-      dispatch(register(inputValues));
-      setIsOpen(true);
-      setInputValues({
-        ...inputValues,
-        username: "",
-        password: "",
-        repeatpassword: ""
-      })      
+      registerRequest()
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
@@ -109,7 +127,7 @@ function Register() {
 
       </motion.div>
       {
-        isOpen && <Alert text='User created succesfully!' setIsOpen={setIsOpen} />
+        isOpen && <Alert text={text} setIsOpen={setIsOpen} />
       }
     </div>
   )
