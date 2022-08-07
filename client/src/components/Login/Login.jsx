@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../redux/actions/types';
 import axios from 'axios';
+import { motion } from "framer-motion";
 
 
 function Login() {
@@ -73,7 +74,11 @@ function Login() {
   const token = window.localStorage.getItem('token');
 
   return (
-    <div className='loginContainer'>
+    <motion.div
+      initial={{ y: 1000 }}
+      animate={{ y: 0 }}
+      transition={{ delay: 0.1 }}
+      className='loginContainer'>
       <div className='login'>
 
         <div className='signIn'>
@@ -101,7 +106,7 @@ function Login() {
         </div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 

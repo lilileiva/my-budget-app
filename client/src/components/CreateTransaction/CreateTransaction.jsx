@@ -103,8 +103,8 @@ function CreateTransaction() {
               <div>
                 <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
                   <option value='null'>Type...</option>
-                  <option value='income'>Income</option>
-                  <option value='egress'>Egress</option>
+                  <option value='Income'>Income</option>
+                  <option value='Egress'>Egress</option>
                 </select>
                 {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
               </div>

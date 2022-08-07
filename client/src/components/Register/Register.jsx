@@ -3,6 +3,7 @@ import './Register.scss';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/actions';
+import { motion } from "framer-motion";
 
 
 function Register() {
@@ -62,11 +63,15 @@ function Register() {
   const token = window.localStorage.getItem('token');
 
   return (
-    <div className='registerContainer'>
+    <motion.div
+      initial={{ y: 1000 }}
+      animate={{ y: 0 }}
+      transition={{ delay: 0.2 }}
+      className='registerContainer'>
       <div className='register'>
 
         <div className='signUp'>
-          <h2>Sign up...</h2>
+          <h2>Sign up</h2>
         </div>
         <div className='registerForm'>
           {
@@ -94,7 +99,7 @@ function Register() {
         </div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 
