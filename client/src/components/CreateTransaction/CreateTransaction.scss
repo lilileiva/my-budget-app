@@ -45,11 +45,25 @@
         @include blue-button-hover();
     }
 
+    .category {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .newCategoryButton {
+        cursor: pointer;
+        color: $red-color;
+        background-color: $background-color;
+        margin-top: 2px;
+        text-align: center;
+    }
+
     .error {
         position: absolute;
         color: $red-error-color;
         margin: 0;
-    }
+    }    
 }
 
 

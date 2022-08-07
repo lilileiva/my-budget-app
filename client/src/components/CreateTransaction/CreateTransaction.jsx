@@ -71,7 +71,14 @@ function CreateTransaction() {
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
 
+  const [addCategory, setAddCategory] = useState(false)
+  const addNewCategory = () => {
+    !addCategory ? setAddCategory(true) : setAddCategory(false);
+  }
+
   const token = window.localStorage.getItem('token');
+
+  console.log(inputValues)
 
   return (
     <div className='createTransaction'>
@@ -87,7 +94,7 @@ function CreateTransaction() {
                 {inputErrors.concept && <p className='error'>{inputErrors.concept}</p>}
               </div>
               <div>
-                <input type='text' name='amount' value={inputValues.amount} placeholder='Amount...' onChange={(e) => handleInputChange(e)} />
+                <input type='text' name='amount' value={inputValues.amount} placeholder='$ Amount...' onChange={(e) => handleInputChange(e)} />
                 {inputErrors.amount && <p className='error'>{inputErrors.amount}</p>}
               </div>
               <div>
@@ -99,18 +106,37 @@ function CreateTransaction() {
                 {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
               </div>
               <div>
-                <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
-                  <option value='null'>Categories...</option>
-                  {
-                    categories
-                      ? <>
-                        {categories.map((category) => (
-                          <option value={category.name}>{category.name}</option>
-                        ))}
-                      </>
-                      : <option value='null'>There are not categories</option>
-                  }
-                </select>
+                {
+                  !addCategory
+                    ? (
+                      <div className='category'>
+                        <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
+                          <option value='null'>Categories...</option>
+                          {
+                            categories
+                              ? <>
+                                {categories.map((category) => (
+                                  <option value={category.name}>{category.name}</option>
+                                ))}
+                              </>
+                              : <option value='null'>There are not categories</option>
+                          }
+                        </select>
+
+                        <a className='newCategoryButton' onClick={() => addNewCategory()}>
+                          Add new category
+                        </a>
+                      </div>
+                    ) : (
+                      <div className='category'>
+                        <input type='text' name='category' value={inputValues.category} placeholder='Category...' onChange={(e) => handleInputChange(e)} />
+
+                        <a className='newCategoryButton' onClick={() => addNewCategory()}>
+                          Select category
+                        </a>
+                      </div>
+                    )
+                }
                 {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
               </div>
               <input type='submit' value='Create' />

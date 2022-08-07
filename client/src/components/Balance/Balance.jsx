@@ -17,8 +17,6 @@ function Balance() {
   let transactions = useSelector((state) => state.transactions);
   transactions = transactions.slice(0, 10);
 
-  console.log('transactions', transactions)
-
 /*----------------CALCALCULATING TOTAL BALANCE-----------*/
   let totalBalance = 0;
 
