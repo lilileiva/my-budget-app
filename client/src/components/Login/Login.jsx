@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Login.scss';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../redux/actions/types';
 import axios from 'axios';
@@ -9,7 +8,6 @@ import { motion } from "framer-motion";
 
 function Login() {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [inputValues, setInputValues] = useState({
@@ -74,12 +72,13 @@ function Login() {
   const token = window.localStorage.getItem('token');
 
   return (
-    <motion.div
-      initial={{ y: 1000 }}
-      animate={{ y: 0 }}
-      transition={{ delay: 0.1 }}
+    <div
       className='loginContainer'>
-      <div className='login'>
+      <motion.div
+        initial={{ y: 1000 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.1 }}
+        className='login'>
 
         <div className='signIn'>
           <h2>Sign in</h2>
@@ -105,8 +104,8 @@ function Login() {
           }
         </div>
 
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   )
 }
 

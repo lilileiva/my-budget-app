@@ -12,24 +12,28 @@ function Home() {
   const token = window.localStorage.getItem('token');
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className='home'>
+    <div className='home'>
       {
         token
-          ? <Balance />
+          ? <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}>
+              <Balance />
+              </motion.div>
           : (
-            <div className='landing-page'>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }} className='landing-page'>
               <h1>Your personal budget is here</h1>
               <a className='registerButton' onClick={() => navigate('/register')}>
                 Sign Up
               </a>
-            </div>
+            </motion.div>
           )
       }
-    </motion.div>
+    </div>
   )
 }
 
