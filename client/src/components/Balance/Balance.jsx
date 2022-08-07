@@ -21,7 +21,7 @@ function Balance() {
 
   if (transactions.length !== 0 && Object.keys(transactions)[0] !== 'error') {
     transactions.map((transaction) => (
-      (transaction.type === 'income') ? totalBalance += transaction.amount : totalBalance -= transaction.amount
+      (transaction.type === 'Income') ? totalBalance += transaction.amount : totalBalance -= transaction.amount
     ))
   }
 

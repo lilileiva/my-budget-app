@@ -45,7 +45,7 @@ function Login() {
     setIsSubmit(true);
   }
 
-  const [isOpen, setIsOpen] = useState(false);  
+  const [isOpen, setIsOpen] = useState(false);
 
   const loginRequest = async () => {
     try {
