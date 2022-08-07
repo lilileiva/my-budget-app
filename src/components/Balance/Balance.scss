@@ -1,0 +1,122 @@
+@import '../../sass/variables.scss';
+
+
+.balanceContainer {
+    width: 500px;
+
+    .buttonContainer {
+        width: inherit;
+        display: flex;
+        justify-content: center;
+
+        button {
+            @include blue-button();
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            margin-top: 3rem;
+            width: inherit;
+        }
+
+        button:hover {
+            @include blue-button-hover();
+        }
+    }
+}
+
+.balance {
+    @include box(white, $red-color, 500px);
+}
+
+.transactions {
+    @include box($brown-color, white, 500px);
+
+    ul {
+        list-style: none;
+        padding: 0;
+        overflow: scroll;
+    }
+
+    li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        cursor: pointer;
+
+        b,
+        p {
+            width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+
+@media (max-width: 850px) {
+    .balanceContainer {
+        width: 430px;
+    }
+
+    .balance {
+        @include box(white, $red-color, 350px);
+    }
+
+    .transactions {
+        @include box($brown-color, white, 350px);
+
+        ul {
+            list-style: none;
+            padding: 0;
+            overflow: scroll;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            cursor: pointer;
+
+            b,
+            p {
+                width: 90px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .balanceContainer {
+        width: 340px;
+    }
+
+    .balance {
+        @include box(white, $red-color, 270px);
+    }
+
+    .transactions {
+        @include box($brown-color, white, 270px);
+
+        ul {
+            list-style: none;
+            padding: 0;
+            overflow: scroll;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            cursor: pointer;
+
+            b,
+            p {
+                width: 80px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 10px;
+            }
+        }
+    }
+}

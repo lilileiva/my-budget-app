@@ -1,0 +1,144 @@
+@import '../../sass/variables.scss';
+
+.createTransaction {
+    @include background-properties();
+
+    .title {
+        @include box(white, $red-color, 500px);
+    }
+    
+    .formContainer {
+        form {
+            display: flex;
+            flex-direction: column;      
+    
+            @include box($brown-color, white, 500px);
+        }
+    }
+
+    .inputContainer {
+        width: 400px;
+    }
+
+    input,
+    select {
+        margin-top: 2rem;
+        font-size: 20px;
+        color: gray;
+               
+    }
+
+    input[type=text] {
+        width: 492px; 
+    }
+    select {
+        width: 500px; 
+    }
+
+    input[type=submit] {
+        @include blue-button();
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-top: 3rem;
+    }
+    input[type=submit]:hover {
+        @include blue-button-hover();
+    }
+
+    .category {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .newCategoryButton {
+        cursor: pointer;
+        color: $red-color;
+        background-color: $background-color;
+        margin-top: 2px;
+        text-align: center;
+    }
+
+    .error {
+        position: absolute;
+        color: $red-error-color;
+        margin: 0;
+    }    
+}
+
+
+@media (max-width: 850px) {
+    .createTransaction {
+        @include background-properties();
+    
+        .title {
+            @include box(white, $red-color, 350px);
+        }
+        
+        .formContainer {
+            form {
+                display: flex;
+                flex-direction: column;      
+        
+                @include box($brown-color, white, 350px);
+            }
+        }
+    
+        .inputContainer {
+            width: 350px;
+        }
+    
+        input,
+        select {
+            margin-top: 2rem;
+            font-size: 20px;
+            color: gray;
+                   
+        }
+    
+        input[type=text] {
+            width: 340px; 
+        }
+        select {
+            width: 350px; 
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .createTransaction {
+        @include background-properties();
+    
+        .title {
+            @include box(white, $red-color, 270px);
+        }
+        
+        .formContainer {
+            form {
+                display: flex;
+                flex-direction: column;      
+        
+                @include box($brown-color, white, 270px);
+            }
+        }
+    
+        .inputContainer {
+            width: 270px;
+        }
+    
+        input,
+        select {
+            margin-top: 2rem;
+            font-size: 20px;
+            color: gray;
+                   
+        }
+    
+        input[type=text] {
+            width: 260px; 
+        }
+        select {
+            width: 270px; 
+        }
+    }
+}

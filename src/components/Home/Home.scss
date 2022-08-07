@@ -1,0 +1,83 @@
+@import '../../sass/variables.scss';
+
+.home {
+    @include background-properties();
+
+    .landing-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+
+        h1 {
+            font-size: 50px;
+            color: $red-color;
+        }
+    }
+
+    .registerButton {
+        background-color: $blue-color;
+        padding: 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        width: fit-content;
+    }
+
+    .registerButton:hover {
+        transition: 0.3s;
+        background-color: $blue-color-hover;
+    }
+}
+
+@media (max-width: 850px) {
+    .home {
+        .landing-page {
+            h1 {
+                font-size: 50px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+
+        .registerButton {
+            background-color: $blue-color;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            width: fit-content;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .registerButton:hover {
+            transition: 0.3s;
+            background-color: $blue-color-hover;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .home {
+        .landing-page {
+            h1 {
+                font-size: 40px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+
+        .registerButton {
+            background-color: $blue-color;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            width: fit-content;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        .registerButton:hover {
+            transition: 0.3s;
+            background-color: $blue-color-hover;
+        }
+    }
+}
