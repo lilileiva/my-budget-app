@@ -85,6 +85,9 @@ $ npm start
 - [SASS](https://sass-lang.com/)
 - [Google Fonts](https://fonts.google.com/)
 - [Framer Motion](https://www.framer.com/motion/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [Loader](https://loading.io/css/)
 
 
 ## Contact
