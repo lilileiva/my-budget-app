@@ -3,6 +3,8 @@ import './Balance.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTransactions } from '../../redux/actions';
+import { AiOutlinePlus, AiOutlineArrowDown } from 'react-icons/ai';
+import { BiStats } from 'react-icons/bi';
 
 
 function Balance() {
@@ -30,12 +32,12 @@ function Balance() {
   return (
     <div className='balanceContainer'>
       <div className='balance'>
-        <p>My balance</p>
+        <p>My balance <BiStats /></p>
         <h2>$ {totalBalance}</h2>
       </div>
 
       <div className='transactions'>
-        <h2>Lastest transactions</h2>
+        <h2>Lastest transactions <AiOutlineArrowDown /></h2>
         <ul>
           <li>
             <b>Concept</b>
@@ -58,7 +60,7 @@ function Balance() {
         </ul>
         <div className='buttonContainer'>
           <button onClick={() => navigate('/transaction/create')}>
-            Create new transaction
+            Create new transaction <AiOutlinePlus />
           </button>
         </div>
       </div>

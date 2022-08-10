@@ -5,6 +5,7 @@ import { BASE_URL } from '../../redux/actions/types';
 import axios from 'axios';
 import { motion } from "framer-motion";
 import Alert from '../Alert/Alert';
+import Loader from '../Loader/Loader';
 
 
 function Login() {
@@ -49,22 +50,25 @@ function Login() {
 
   const loginRequest = async () => {
     try {
-      const response = await axios.post(`${BASE_URL}/users/login`, inputValues);      
-      const token = response.data.token;              
+      const response = await axios.post(`${BASE_URL}/users/login`, inputValues);
+      const token = response.data.token;
 
-      if (response.status === 200 && token) {        
+      if (response.status === 200 && token) {
         window.localStorage.setItem('token', token);
         navigate('/');
       } else {
-        if (!isOpen) setIsOpen(true);        
+        if (!isOpen) setIsOpen(true);
       }
     } catch (error) {
       console.log(error)
     }
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      setIsLoading(true);
       loginRequest()
     }
     setIsSubmit(false);
@@ -99,16 +103,22 @@ function Login() {
                   {inputErrors.password && <p className='error'>{inputErrors.password}</p>}
                 </div>
                 <div className='buttonContainer'>
-                  <input className='loginButton' type='submit' value='Log in' />
+                  {
+                    isLoading
+                      ? <div className='loaderContainer'>
+                        <Loader />
+                      </div>
+                      : <input className='loginButton' type='submit' value='Log in' />
+                  }
                 </div>
               </form>
           }
         </div>
 
-      </motion.div>    
+      </motion.div>
       {
         isOpen && <Alert text='Incorrect username or password' setIsOpen={setIsOpen} />
-      }      
+      }
     </div>
   )
 }

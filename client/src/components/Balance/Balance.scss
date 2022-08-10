@@ -6,15 +6,17 @@
 
     .buttonContainer {
         width: inherit;
-        display: flex;
-        justify-content: center;
+        display: flex;               
 
         button {
             @include blue-button();
             padding-top: 1rem;
             padding-bottom: 1rem;
             margin-top: 3rem;
-            width: inherit;
+            width: inherit;            
+            display: flex;            
+            align-items: center;
+            justify-content: center;
         }
 
         button:hover {
@@ -25,10 +27,20 @@
 
 .balance {
     @include box(white, $red-color, 500px);
+
+    p {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .transactions {
     @include box($brown-color, white, 500px);
+
+    h2 {
+        display: flex;
+        align-items: center;
+    }
 
     ul {
         list-style: none;

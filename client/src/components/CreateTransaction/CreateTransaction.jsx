@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CreateTransaction.scss';
 import { createTransaction, getCategories } from '../../redux/actions';
 import Alert from '../Alert/Alert';
+import Loader from '../Loader/Loader';
 
 
 function CreateTransaction() {
@@ -62,8 +63,11 @@ function CreateTransaction() {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      setIsLoading(true);
       dispatch(createTransaction(inputValues));
       setIsOpen(true);
       setInputValues({
@@ -143,7 +147,13 @@ function CreateTransaction() {
                 }
                 {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
               </div>
-              <input type='submit' value='Create' />
+              {
+                isLoading
+                  ? <div className='loaderContainer'>
+                    <Loader />
+                  </div>
+                  : <input type='submit' value='Create' />
+              }
             </form>
             : <>
               <p>You should sign in to create a transaction</p>

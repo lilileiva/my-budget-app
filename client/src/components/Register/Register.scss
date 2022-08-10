@@ -36,6 +36,17 @@
         .signUpButton:hover {
             @include blue-button-hover();
         }
+
+        .loaderContainer {
+            @include blue-button();
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding: 1rem;  
+            width: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;          
+        }
     }
 
 }

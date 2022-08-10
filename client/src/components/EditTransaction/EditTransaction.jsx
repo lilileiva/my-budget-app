@@ -5,6 +5,7 @@ import { editTransaction } from '../../redux/actions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCategories } from '../../redux/actions';
 import Alert from '../Alert/Alert';
+import Loader from '../Loader/Loader';
 
 
 function EditTransaction() {
@@ -58,17 +59,19 @@ function EditTransaction() {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      setIsLoading(true);
       dispatch(editTransaction(inputValues, id));
-      // navigate('/');
+      setIsOpen(true);
       setInputValues({
         ...inputValues,
         concept: "",
-        amount: "",        
+        amount: "",
         category: ""
       })
-      setIsOpen(true);
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
@@ -131,7 +134,13 @@ function EditTransaction() {
                 }
                 {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
               </div>
-              <input type='submit' value='Edit' />
+              {
+                isLoading
+                  ? <div className='loaderContainer'>
+                    <Loader />
+                  </div>
+                  : <input type='submit' value='Edit' />
+              }
             </form>
             : <>
               <p>404 not found</p>

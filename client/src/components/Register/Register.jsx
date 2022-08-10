@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Alert from '../Alert/Alert';
 import axios from 'axios';
 import { BASE_URL } from '../../redux/actions/types';
+import Loader from '../Loader/Loader';
 
 
 function Register() {
@@ -80,8 +81,11 @@ function Register() {
     }
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      setIsLoading(true);
       registerRequest()
     }
     setIsSubmit(false);
@@ -118,11 +122,16 @@ function Register() {
                   {inputErrors.repeatpassword && <p className='error'>{inputErrors.repeatpassword}</p>}
                 </div>
                 <div className='buttonContainer'>
-                  <input className='signUpButton' type='submit' value='Sign up' />
+                  {
+                    isLoading
+                      ? <div className='loaderContainer'>
+                        <Loader />
+                      </div>
+                      : <input className='signUpButton' type='submit' value='Sign up' />
+                  }
                 </div>
               </form>
           }
-
         </div>
 
       </motion.div>

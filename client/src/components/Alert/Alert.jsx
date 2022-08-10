@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Alert.scss';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { AiOutlineCheck } from 'react-icons/ai';
 
@@ -9,9 +9,11 @@ function Alert({ text, setIsOpen }) {
 
     const navigate = useNavigate();
 
+    const pathname = window.location.pathname;
+
     const closeAlert = () => {
         setIsOpen(false);
-        navigate('/');
+        pathname === '/register' ? navigate('/login') : navigate('/');        
     }
 
     return (
