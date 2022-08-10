@@ -35,7 +35,7 @@ function Balance() {
       </div>
 
       <div className='transactions'>
-        <h2>Last transactions</h2>
+        <h2>Lastest transactions</h2>
         <ul>
           <li>
             <b>Concept</b>

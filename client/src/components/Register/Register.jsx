@@ -31,7 +31,7 @@ function Register() {
       errors.password = 'You must insert a password.';
     }
     if (!inputValues.repeatpassword) {
-      errors.password = 'You must repeat the password.';
+      errors.repeatpassword = 'You must repeat the password.';
     }
     if (inputValues.password && inputValues.repeatpassword && inputValues.password !== inputValues.repeatpassword) {
       errors.repeatpassword = 'Passwords are different';

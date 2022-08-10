@@ -16,6 +16,7 @@
     input {   
         width: 100%;     
         margin-top: 2rem;
+        font-weight: 200;
 
     }
 
@@ -30,6 +31,7 @@
             @include blue-button();
             margin-top: 3rem;
             margin-bottom: 1rem;
+            padding: 1rem;
         }
 
         .loginButton:hover {

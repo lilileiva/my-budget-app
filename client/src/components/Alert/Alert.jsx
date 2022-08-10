@@ -1,9 +1,18 @@
 import React from 'react';
 import './Alert.scss';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
+import { AiOutlineCheck } from 'react-icons/ai';
 
 
 function Alert({ text, setIsOpen }) {
+
+    const navigate = useNavigate();
+
+    const closeAlert = () => {
+        setIsOpen(false);
+        navigate('/');
+    }
 
     return (
         <motion.div
@@ -12,8 +21,8 @@ function Alert({ text, setIsOpen }) {
             transition={{ duration: 0.1 }}
             className='alertContainer'>
             <p>{text}</p>
-            <button onClick={() => setIsOpen(false)}>
-                Ok!
+            <button onClick={() => closeAlert()}>
+                <AiOutlineCheck />
             </button>
         </motion.div>
     )
