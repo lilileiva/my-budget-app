@@ -26,7 +26,7 @@
 }
 
 .balance {
-    @include box(white, $red-color, 500px);
+    @include box(white, $red-color, 550px);
 
     p {
         display: flex;
@@ -35,7 +35,7 @@
 }
 
 .transactions {
-    @include box($brown-color, white, 500px);
+    @include box($brown-color, white, 550px);
 
     h2 {
         display: flex;

@@ -44,6 +44,7 @@ function Balance() {
             <b>Amount</b>
             <b>Type</b>
             <b>Category</b>
+            <b>Date</b>
           </li>
           {
             transactions.length > 0
@@ -53,6 +54,7 @@ function Balance() {
                   <p>${transaction.amount}</p>
                   <p>{transaction.type}</p>
                   <p>{transaction.Category.name}</p>
+                  <p>{transaction.updatedAt.toString().slice(0, 10)}</p>
                 </li>
               ))
               : <p>No transactions are registered</p>
