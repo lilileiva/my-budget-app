@@ -33,7 +33,8 @@
 
 ## Overview
 
-![image](https://user-images.githubusercontent.com/94813118/183281948-1ad20cfc-2260-4019-8ed4-27cda1b5c52a.png)
+![image](https://user-images.githubusercontent.com/94813118/184561117-467852ba-1c3a-490b-92a9-0a6e07fcbff0.png)
+
 
 <!-- Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
 
