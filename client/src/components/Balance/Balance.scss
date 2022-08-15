@@ -35,7 +35,7 @@
 }
 
 .transactions {
-    @include box($brown-color, white, 550px);
+    @include box($brown-color, white, 550px);    
 
     h2 {
         display: flex;
@@ -46,6 +46,7 @@
         list-style: none;
         padding: 0;
         overflow: scroll;
+        max-height: 300px;
     }
 
     li {

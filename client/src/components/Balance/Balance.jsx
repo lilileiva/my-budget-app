@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTransactions } from '../../redux/actions';
 import { AiOutlinePlus, AiOutlineArrowDown } from 'react-icons/ai';
-import { BiStats } from 'react-icons/bi';
+
+import  { PureComponent } from 'react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
 function Balance() {
@@ -16,7 +18,7 @@ function Balance() {
     dispatch(getTransactions());
   }, [dispatch])
 
-  const transactions = useSelector((state) => state.transactions);
+  let transactions = useSelector((state) => state.transactions);
 
   /*----------------CALCALCULATING TOTAL BALANCE-----------*/
   let totalBalance = 0;
@@ -29,11 +31,17 @@ function Balance() {
 
   /*----------------END CALCALCULATING TOTAL BALANCE-----------*/
 
+  if (transactions.length > 0) {
+    transactions= transactions.sort(function(a,b){
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+  }
+
   return (
     <div className='balanceContainer'>
       <div className='balance'>
-        <p>My balance <BiStats /></p>
-        <h2>$ {totalBalance}</h2>
+        <p>My balance</p>
+        <h2>$ {totalBalance}</h2>        
       </div>
 
       <div className='transactions'>
@@ -65,7 +73,7 @@ function Balance() {
             Create new transaction <AiOutlinePlus />
           </button>
         </div>
-      </div>
+      </div> 
     </div>
   )
 }
