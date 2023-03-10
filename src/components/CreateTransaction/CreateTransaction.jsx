@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './CreateTransaction.scss';
 import { createTransaction, getCategories } from '../../redux/actions';
+import Alert from '../Alert/Alert';
+import Loader from '../Loader/Loader';
 
 
 function CreateTransaction() {
@@ -31,7 +33,7 @@ function CreateTransaction() {
     if (!inputValues.amount) {
       errors.amount = 'You must fill amount field.';
     }
-    if (inputValues.amount && inputValues.amount !== Number(inputValues.amount)) {
+    if (inputValues.amount && !(inputValues.amount == Number(inputValues.amount))) {
       errors.amount = 'Amount must be a number.';
     }
     if (!inputValues.type) {
@@ -59,9 +61,15 @@ function CreateTransaction() {
     setIsSubmit(true);
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      setIsLoading(true);
       dispatch(createTransaction(inputValues));
+      setIsOpen(true);
       setInputValues({
         ...inputValues,
         concept: "",
@@ -69,7 +77,6 @@ function CreateTransaction() {
         type: "",
         category: ""
       })
-
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
@@ -80,8 +87,6 @@ function CreateTransaction() {
   }
 
   const token = window.localStorage.getItem('token');
-
-  console.log(inputValues)
 
   return (
     <div className='createTransaction'>
@@ -103,8 +108,8 @@ function CreateTransaction() {
               <div>
                 <select type='text' name='type' onClick={(e) => handleInputChange(e)}>
                   <option value='null'>Type...</option>
-                  <option value='income'>Income</option>
-                  <option value='egress'>Egress</option>
+                  <option value='Income'>Income</option>
+                  <option value='Egress'>Egress</option>
                 </select>
                 {inputErrors.type && <p className='error'>{inputErrors.type}</p>}
               </div>
@@ -114,15 +119,15 @@ function CreateTransaction() {
                     ? (
                       <div className='category'>
                         <select type='text' name='category' onClick={(e) => handleInputChange(e)} >
-                          <option value='null'>Categories...</option>
+                          <option>Categories...</option>
                           {
-                            categories
+                            categories.length !== 0
                               ? <>
                                 {categories.map((category) => (
                                   <option value={category.name}>{category.name}</option>
                                 ))}
                               </>
-                              : <option value='null'>There are not categories</option>
+                              : <option>There are not categories</option>
                           }
                         </select>
 
@@ -142,13 +147,22 @@ function CreateTransaction() {
                 }
                 {inputErrors.category && <p className='error'>{inputErrors.category}</p>}
               </div>
-              <input type='submit' value='Create' />
+              {
+                isLoading
+                  ? <div className='loaderContainer'>
+                    <Loader />
+                  </div>
+                  : <input type='submit' value='Create' />
+              }
             </form>
             : <>
               <p>You should sign in to create a transaction</p>
             </>
         }
       </div>
+      {
+        isOpen && <Alert text='Transaction created succesfully!' setIsOpen={setIsOpen} />
+      }
     </div>
   )
 }

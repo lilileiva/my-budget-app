@@ -1,0 +1,48 @@
+@import '../../sass/variables.scss';
+
+.alertContainer {
+    width: 300px;
+    height: 250px;
+    background-color: white;
+    color: $brown-color;
+    font-size: 25px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 2px 2px 15px -1px rgba(0, 0, 0, 0.75);    
+
+    p {
+        display: flex;
+        width: inherit;
+        height: 150px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        background-color: $blue-color;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
+    button:hover {
+        background-color: $blue-color-hover;
+        transition: 0.2s;
+    }
+}

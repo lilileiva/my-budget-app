@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Login.scss';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../redux/actions/types';
 import axios from 'axios';
+import { motion } from "framer-motion";
+import Alert from '../Alert/Alert';
+import Loader from '../Loader/Loader';
 
 
 function Login() {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [inputValues, setInputValues] = useState({
@@ -45,26 +46,29 @@ function Login() {
     setIsSubmit(true);
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const loginRequest = async () => {
-
     try {
-      const response = await axios.post(`${BASE_URL}/users/login`, inputValues)
+      const response = await axios.post(`${BASE_URL}/users/login`, inputValues);
+      const token = response.data.token;
 
-      if (response.status === 200) {
-        const token = response.data.token;
+      if (response.status === 200 && token) {
         window.localStorage.setItem('token', token);
         navigate('/');
-      }
-      else if (response.status === 404) {
-        console.log('Username or password invalid')
+      } else {
+        if (!isOpen) setIsOpen(true);
       }
     } catch (error) {
       console.log(error)
     }
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
+      setIsLoading(true);
       loginRequest()
     }
     setIsSubmit(false);
@@ -73,8 +77,13 @@ function Login() {
   const token = window.localStorage.getItem('token');
 
   return (
-    <div className='loginContainer'>
-      <div className='login'>
+    <div
+      className='loginContainer'>
+      <motion.div
+        initial={{ y: 1000 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.1 }}
+        className='login'>
 
         <div className='signIn'>
           <h2>Sign in</h2>
@@ -94,13 +103,22 @@ function Login() {
                   {inputErrors.password && <p className='error'>{inputErrors.password}</p>}
                 </div>
                 <div className='buttonContainer'>
-                  <input className='loginButton' type='submit' value='Log in' />
+                  {
+                    isLoading
+                      ? <div className='loaderContainer'>
+                        <Loader />
+                      </div>
+                      : <input className='loginButton' type='submit' value='Log in' />
+                  }
                 </div>
               </form>
           }
         </div>
 
-      </div>
+      </motion.div>
+      {
+        isOpen && <Alert text='Incorrect username or password' setIsOpen={setIsOpen} />
+      }
     </div>
   )
 }

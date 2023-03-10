@@ -5,82 +5,66 @@ import {
 } from './types.js';
 
 
-// export function getTransactions() {
-//     return async function (dispatch) {
-//         try {
-//             const http = new XMLHttpRequest();
-//             const url = `${BASE_URL}/transactions/get`
-
-//             http.open("GET", url);
-//             http.setRequestHeader("Accept", "application/json");
-//             http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
-
-//             http.onreadystatechange = function () {
-//                 if (this.readyState == 4 && this.status == 200) {
-//                     dispatch({
-//                         type: GET_TRANSACTIONS,
-//                         payload: this.response
-//                     })
-//                 }
-//             }
-
-//             http.send();
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     }
-// }
 export function getTransactions() {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/transactions/get`, {
-                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-            })
-                .then((res) => res.json())
-                .then((data) => {
+            const http = new XMLHttpRequest();
+            const url = `${BASE_URL}/transactions/get`
+            http.open("GET", url);
+            http.setRequestHeader("Accept", "application/json");
+            http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
                     dispatch({
                         type: GET_TRANSACTIONS,
-                        payload: data
+                        payload: JSON.parse(this.responseText)
                     })
-                })
+                }
+            }
+            http.send();
         } catch (error) {
             console.log(error)
         }
     }
 }
+
 
 export function createTransaction(inputValues) {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/transactions/create`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    },
-                    body: JSON.stringify(inputValues),
+            const post = JSON.stringify(inputValues)
+            const http = new XMLHttpRequest();
+            const url = `${BASE_URL}/transactions/create`
+            http.open("POST", url, true);
+            http.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+            http.onload = function () {
+                if(http.status === 201) {
+                    console.log("Transaction successfully created!") 
                 }
-
-            )
-                .then((res) => res.json());
+            }
+            http.send(post);
         } catch (error) {
             console.log(error)
         }
     }
 }
 
-export function editTransaction(transactionEdited, id) {
+export function editTransaction(inputValues, id) {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/transactions/update/${id}`,
-                {
-                    method: "PUT",
-                    body: transactionEdited,
-                    headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-                }
-            )
-                .then((res) => res.json());
+                const post = JSON.stringify(inputValues)
+                const http = new XMLHttpRequest();
+                const url = `${BASE_URL}/transactions/update/${id}`    
+                http.open("PUT", url, true);
+                http.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+                http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);    
+                http.onload = function () {
+                    if(http.status === 201) {
+                        console.log("Transaction successfully edited!") 
+                    }
+                }    
+                http.send(post);
         } catch (error) {
             console.log(error)
         }
@@ -90,32 +74,36 @@ export function editTransaction(transactionEdited, id) {
 export function getCategories() {
     return async function (dispatch) {
         try {
-            await fetch(`${BASE_URL}/categories/get`)
-                .then((res) => res.json())
-                .then((data) => {
+            const http = new XMLHttpRequest();
+            const url = `${BASE_URL}/categories/get`
+            http.open("GET", url);
+            http.setRequestHeader("Accept", "application/json");
+            http.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("token")}`);
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
                     dispatch({
                         type: GET_CATEGORIES,
-                        payload: data
+                        payload: JSON.parse(this.responseText)
                     })
-                })
+                }
+            }
+            http.send();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 
-            // const http = new XMLHttpRequest();
-            // const url = `${BASE_URL}/categories/get`
-
-            // http.open("GET", url);
-
-            // http.setRequestHeader("Accept", "application/json");
-
-            // http.onreadystatechange = function () {
-            //     if (this.readyState == 4 && this.status == 200) {
-            //         dispatch({
-            //             type: GET_CATEGORIES,
-            //             payload: this.responseText
-            //         })
-            //     }
-            // }            
-
-            // http.send();
+export function deleteCategory(id) {
+    return async function (dispatch) {
+        try {
+            await fetch(`${BASE_URL}/categories/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then((res) => res.json());
         } catch (error) {
             console.log(error)
         }

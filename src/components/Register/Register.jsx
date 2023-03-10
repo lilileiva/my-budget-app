@@ -3,6 +3,11 @@ import './Register.scss';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../redux/actions';
+import { motion } from "framer-motion";
+import Alert from '../Alert/Alert';
+import axios from 'axios';
+import { BASE_URL } from '../../redux/actions/types';
+import Loader from '../Loader/Loader';
 
 
 function Register() {
@@ -27,7 +32,7 @@ function Register() {
       errors.password = 'You must insert a password.';
     }
     if (!inputValues.repeatpassword) {
-      errors.password = 'You must repeat the password.';
+      errors.repeatpassword = 'You must repeat the password.';
     }
     if (inputValues.password && inputValues.repeatpassword && inputValues.password !== inputValues.repeatpassword) {
       errors.repeatpassword = 'Passwords are different';
@@ -51,10 +56,37 @@ function Register() {
     setIsSubmit(true);
   }
 
+  const [text, setText] = useState("")
+  const [isOpen, setIsOpen] = useState(false);
+
+  const registerRequest = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/users/register`, inputValues);
+
+      if (response.status === 201) {
+        setText('User created succesfully!');
+        setIsOpen(true);
+        setInputValues({
+          ...inputValues,
+          username: "",
+          password: "",
+          repeatpassword: ""
+        })
+      } else {
+        setText('Username is not available');
+        setIsOpen(true);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (Object.keys(inputErrors).length === 0 && isSubmit) {
-      dispatch(register(inputValues));
-      navigate('/');
+      setIsLoading(true);
+      registerRequest()
     }
     setIsSubmit(false);
   }, [inputErrors, isSubmit]);
@@ -63,10 +95,14 @@ function Register() {
 
   return (
     <div className='registerContainer'>
-      <div className='register'>
+      <motion.div
+        initial={{ y: 1000 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.2 }}
+        className='register'>
 
         <div className='signUp'>
-          <h2>Sign up...</h2>
+          <h2>Sign up</h2>
         </div>
         <div className='registerForm'>
           {
@@ -86,14 +122,22 @@ function Register() {
                   {inputErrors.repeatpassword && <p className='error'>{inputErrors.repeatpassword}</p>}
                 </div>
                 <div className='buttonContainer'>
-                  <input className='signUpButton' type='submit' value='Sign up' />
+                  {
+                    isLoading
+                      ? <div className='loaderContainer'>
+                        <Loader />
+                      </div>
+                      : <input className='signUpButton' type='submit' value='Sign up' />
+                  }
                 </div>
               </form>
           }
-
         </div>
 
-      </div>
+      </motion.div>
+      {
+        isOpen && <Alert text={text} setIsOpen={setIsOpen} />
+      }
     </div>
   )
 }

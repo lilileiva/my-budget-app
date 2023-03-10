@@ -6,15 +6,17 @@
 
     .buttonContainer {
         width: inherit;
-        display: flex;
-        justify-content: center;
+        display: flex;               
 
         button {
             @include blue-button();
             padding-top: 1rem;
             padding-bottom: 1rem;
             margin-top: 3rem;
-            width: inherit;
+            width: inherit;            
+            display: flex;            
+            align-items: center;
+            justify-content: center;
         }
 
         button:hover {
@@ -24,30 +26,62 @@
 }
 
 .balance {
-    @include box(white, $red-color, 500px);
+    @include box(white, $red-color, 550px);
+
+    p {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .transactions {
-    @include box($brown-color, white, 500px);
+    @include box($brown-color, white, 550px);    
+
+    h2 {
+        display: flex;
+        align-items: center;
+    }
 
     ul {
         list-style: none;
         padding: 0;
         overflow: scroll;
+        max-height: 300px;    
     }
 
     li {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        width: 450px;
         cursor: pointer;
 
         b,
         p {
-            width: 100px;
+            width: 150px;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        .amount {
+            width: 200px;
+        }
+
+        .date {
+            width: 200px;
+        }
+    }
+
+    .income {
+        width: 200px;
+        color: rgb(0, 152, 5);
+        font-weight: 600;
+    }
+
+    .egress {
+        width: 200px;
+        color: red;
+        font-weight: 600;
     }
 }
 
