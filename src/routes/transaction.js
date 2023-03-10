@@ -6,8 +6,8 @@ const {
 } = require('../controllers/transaction');
 const validateUsers = require('../middleware/validateUsers');
 
-const transactionRoutes = Router();
 
+const transactionRoutes = Router();
 
 transactionRoutes.get('/get', validateUsers, getTransactions);
 transactionRoutes.post('/create', validateUsers, createTransaction);

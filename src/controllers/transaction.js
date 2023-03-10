@@ -26,19 +26,18 @@ const getTransactions = async (req, res) => {
 
 const createTransaction = async (req, res) => {
     const { concept, amount, type, category } = req.body;
-
     try {
         const categoryFound = await Category.findOne({
             where: {
-                name: category
+                name: category,
+                userId: req.user
             }
         });
         if (!categoryFound) {
             const newCategory = await Category.create({
                 name: category,
-
+                userId: req.user
             })            
-            
             const newTransaction = await Transaction.create({
                 concept,
                 amount: Number(amount),
@@ -64,15 +63,12 @@ const createTransaction = async (req, res) => {
 const updateTransaction = async (req, res) => {
     const { id } = req.params;
     const { concept, amount, category } = req.body;
-
     try {
         const transaction = await Transaction.findByPk(id);
-
         if (transaction.userId === req.user) {
             const categoryFound = await Category.findOne({
                 where: { name: category }
             });
-    
             if (!categoryFound) {
                 const newCategory = await Category.create({
                     name: category
@@ -91,7 +87,6 @@ const updateTransaction = async (req, res) => {
         } else {
             return res.status(200).json("You don't have access to update this transaction");
         }
-
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

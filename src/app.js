@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 //routes
-app.use('/', routes);
+app.use('/my_budget_app', routes);
 
 // Error catching endware.
 app.use((err, req, res, next) => {
