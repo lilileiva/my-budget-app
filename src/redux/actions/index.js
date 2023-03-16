@@ -71,6 +71,23 @@ export function editTransaction(inputValues, id) {
     }
 }
 
+export function deleteTransaction(id) {
+    return async function (dispatch) {
+        try {
+            await fetch(`${BASE_URL}/transactions/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then((res) => res.json());
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+
 export function getCategories() {
     return async function (dispatch) {
         try {

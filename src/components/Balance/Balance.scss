@@ -116,6 +116,26 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+
+            .amount {
+                width: 100px;
+            }
+    
+            .date {
+                width: 100px;
+            }
+        }
+
+        .income {
+            width: 100px;
+            color: rgb(0, 152, 5);
+            font-weight: 600;
+        }
+    
+        .egress {
+            width: 100px;
+            color: red;
+            font-weight: 600;
         }
     }
 }
@@ -151,6 +171,26 @@
                 text-overflow: ellipsis;
                 margin-right: 10px;
             }
+
+            .amount {
+                width: 100px;
+            }
+    
+            .date {
+                width: 100px;
+            }
+        }
+
+        .income {
+            width: 100px;
+            color: rgb(0, 152, 5);
+            font-weight: 600;
+        }
+    
+        .egress {
+            width: 100px;
+            color: red;
+            font-weight: 600;
         }
     }
 }
