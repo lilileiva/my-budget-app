@@ -17,12 +17,14 @@ const getCategories = async (req, res) => {
 const deleteCategory = async (req, res) => {
     const { id } = req.params;
     try {
-        const category = await Category.findOne({
-            where: { id: id }
-        })
+        const category = await Category.findByPk(id);
         const categoryName = category.name
-        category.destroy()
-        return res.status(200).json(`Category "${categoryName}" deleted`);
+        if (category.userId == req.user) {
+            await category.destroy()
+            return res.status(200).json(`Category "${categoryName}" deleted`);
+        } else {
+            return res.status(200).json(`You don't have permissions to delete this category`);
+        }    
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

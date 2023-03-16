@@ -62,12 +62,15 @@ const createTransaction = async (req, res) => {
 
 const updateTransaction = async (req, res) => {
     const { id } = req.params;
-    const { concept, amount, category } = req.body;
+    const { concept, amount, category, type } = req.body;
     try {
         const transaction = await Transaction.findByPk(id);
         if (transaction.userId === req.user) {
             const categoryFound = await Category.findOne({
-                where: { name: category }
+                where: {
+                    id: req.user,
+                    name: category
+                }
             });
             if (!categoryFound) {
                 const newCategory = await Category.create({
@@ -76,6 +79,7 @@ const updateTransaction = async (req, res) => {
                 transaction.concept = concept;
                 transaction.amount = amount;
                 transaction.categoryId = newCategory.id;
+                transaction.type = type;
                 await transaction.save();
             } else {            
                 transaction.concept = concept;
@@ -85,10 +89,25 @@ const updateTransaction = async (req, res) => {
             }
             return res.status(201).json('Transaction updated');
         } else {
-            return res.status(200).json("You don't have access to update this transaction");
+            return res.status(200).json("You don't have permission to update this transaction");
         }
     } catch (error) {
         return res.status(500).json({ error: error.message });
+    }
+}
+
+const deleteTransaction = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const transaction = await Transaction.findByPk(id);
+        if (transaction.userId == req.user) {
+            await transaction.destroy()
+            return res.status(200).json("Transaction successful deleted");
+        } else {
+            return res.status(200).json("You don't have permission to delete this transaction");
+        }        
+    } catch (error) {
+        return res.status(json).json({ error: error.message })
     }
 }
 
@@ -96,5 +115,6 @@ const updateTransaction = async (req, res) => {
 module.exports = {
     getTransactions,
     createTransaction,
-    updateTransaction
+    updateTransaction,
+    deleteTransaction
 }
