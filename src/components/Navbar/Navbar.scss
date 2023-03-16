@@ -1,0 +1,74 @@
+@import '../../sass/variables.scss';
+
+.navbar {
+    width: initial;
+    height: 100px;    
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+
+    h1 {
+        font-size: 40px;
+        color: $brown-color;
+        cursor: pointer;
+    }
+}
+
+.buttons {
+    cursor: pointer;
+
+    a {
+        text-decoration: none;
+        color: $brown-color;
+        font-size: 20px;
+    }
+
+    .registerButton {
+        background-color: $blue-color;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    .registerButton:hover {
+        transition: 0.3s;
+        background-color: $blue-color-hover;
+    }
+
+    .loginButton:hover {
+        transition: 0.3s;
+        text-shadow: 1.5px 1.5px 8px black;
+    }
+}
+
+.buttons a:first-of-type {
+    margin-right: 2rem;
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    
+        h1 {
+            font-size: 30px;
+            color: $brown-color;
+            cursor: pointer;
+        }
+    }
+    
+    .buttons {
+        cursor: pointer;
+    
+        a {
+            text-decoration: none;
+            color: $brown-color;
+            font-size: 15px;
+        }
+
+    }
+    .buttons a:first-of-type {
+        margin-right: 1rem;
+    }
+}

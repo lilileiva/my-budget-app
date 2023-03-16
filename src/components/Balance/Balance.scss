@@ -1,0 +1,156 @@
+@import '../../sass/variables.scss';
+
+
+.balanceContainer {
+    width: 500px;
+
+    .buttonContainer {
+        width: inherit;
+        display: flex;               
+
+        button {
+            @include blue-button();
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            margin-top: 3rem;
+            width: inherit;            
+            display: flex;            
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            @include blue-button-hover();
+        }
+    }
+}
+
+.balance {
+    @include box(white, $red-color, 550px);
+
+    p {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.transactions {
+    @include box($brown-color, white, 550px);    
+
+    h2 {
+        display: flex;
+        align-items: center;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        overflow: scroll;
+        max-height: 300px;    
+    }
+
+    li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 450px;
+        cursor: pointer;
+
+        b,
+        p {
+            width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .amount {
+            width: 200px;
+        }
+
+        .date {
+            width: 200px;
+        }
+    }
+
+    .income {
+        width: 200px;
+        color: rgb(0, 152, 5);
+        font-weight: 600;
+    }
+
+    .egress {
+        width: 200px;
+        color: red;
+        font-weight: 600;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .balanceContainer {
+        width: 430px;
+    }
+
+    .balance {
+        @include box(white, $red-color, 350px);
+    }
+
+    .transactions {
+        @include box($brown-color, white, 350px);
+
+        ul {
+            list-style: none;
+            padding: 0;
+            overflow: scroll;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            cursor: pointer;
+
+            b,
+            p {
+                width: 90px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .balanceContainer {
+        width: 340px;
+    }
+
+    .balance {
+        @include box(white, $red-color, 270px);
+    }
+
+    .transactions {
+        @include box($brown-color, white, 270px);
+
+        ul {
+            list-style: none;
+            padding: 0;
+            overflow: scroll;
+        }
+
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            cursor: pointer;
+
+            b,
+            p {
+                width: 80px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 10px;
+            }
+        }
+    }
+}
